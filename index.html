@@ -169,8 +169,8 @@
       to { opacity: 1; transform: scale(1) translateY(0); }
     }
     @keyframes glowPulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
     .fade-in-up { animation: fadeInUp 1s cubic-bezier(0.16,1,0.3,1) forwards; }
     .card-animate {
@@ -230,6 +230,8 @@
       transition: all 0.3s ease;
       font-family: var(--font-body);
     }
+    .search-input::placeholder { color: rgba(255,255,255,.45); }
+    body.light .search-input::placeholder, body.gray .search-input::placeholder { color: rgba(0,0,0,.4); }
     .search-input:focus {
       background: rgba(255,255,255,.2);
       border-color: rgba(139,92,246,.6);
@@ -529,7 +531,7 @@
       align-items: center;
     }
     .card-links a {
-      color: rgba(255,255,255,.6);
+      color: rgba(255,255,255,.7);
       transition: all 0.3s;
       display: flex;
       padding: 3px;
@@ -540,7 +542,7 @@
       color: var(--accent-color);
       background: rgba(59,130,246,.1);
     }
-    body.light .card-links a, body.gray .card-links a { color: #64748b; }
+    body.light .card-links a, body.gray .card-links a { color: #475569; }
     .category-badge {
       font-size: 0.6rem;
       font-weight: 600;
@@ -596,9 +598,9 @@
       letter-spacing: 0.01em;
     }
     body.light .demo-btn, body.gray .demo-btn {
-      background: rgba(0,0,0,.02);
-      border-color: rgba(0,0,0,.06);
-      color: #64748b;
+      background: rgba(0,0,0,.04);
+      border-color: rgba(0,0,0,.1);
+      color: #475569;
     }
     .demo-btn:hover {
       background: var(--accent-gradient);
@@ -718,7 +720,7 @@
       padding: 2rem;
       text-align: center;
       background: #0a0a1a;
-      color: #94a3b8;
+      color: #cbd5e1;
     }
     .blocked-msg h4 {
       font-size: 1.5rem;
@@ -792,7 +794,7 @@
     }
     .splash-image .splash-emoji {
       font-size: 4rem;
-      opacity: 0.4;
+      opacity: 0.7;
       animation: float 4s ease-in-out infinite;
     }
     .splash-close {
@@ -921,7 +923,7 @@
     footer .tech-links {
       margin-bottom: 12px;
       font-size: 0.85rem;
-      font-weight: 400;
+      font-weight: 500;
       display: flex;
       justify-content: center;
       gap: 8px;
@@ -1342,7 +1344,7 @@ function renderCards() {
   if (libs.length === 0) {
     $('cardGrid').innerHTML = `
       <div class="no-results">
-        <div style="margin-bottom:24px;opacity:0.2">${ICONS.search}</div>
+        <div style="margin-bottom:24px;opacity:0.5">${ICONS.search}</div>
         <h3>${t.noResults}</h3>
       </div>`;
     return;
@@ -1409,7 +1411,7 @@ function openDemo(libId) {
   if (isBlocked) {
     $('modalBody').innerHTML = `
       <div class="blocked-msg">
-        <div style="margin-bottom:1.5rem;opacity:0.5">${ICONS.shield}</div>
+        <div style="margin-bottom:1.5rem;opacity:0.75">${ICONS.shield}</div>
         <h4>${t.blockedMsg}</h4>
         <p>${lib.name} ${currentLang === 'ko' ? '사이트는 보안 정책상 인라인 프레임으로 제공되지 않습니다.' : 'site does not provide inline frame due to security policies.'}</p>
         <a href="${lib.demoUrl}" target="_blank" rel="noreferrer" class="open-external">
