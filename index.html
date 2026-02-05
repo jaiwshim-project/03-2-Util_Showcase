@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✨</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultimate UI Showcase | Premium Library Hub</title>
+  <meta name="description" content="10가지 프리미엄 UI 컴포넌트 라이브러리를 한눈에 확인하세요.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #030014;
+      --card-bg: rgba(15, 15, 35, .65);
+      --card-border: rgba(255, 255, 255, .08);
+      --accent-color: #3b82f6;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+      --accent-gradient-2: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899);
+      --text-main: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --glass-blur: blur(20px);
+      --font-header: "Outfit", sans-serif;
+      --font-body: "Inter", sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      padding-bottom: 100px;
+      transition: background-color 0.5s ease, color 0.5s ease;
+    }
+    /* Animated background orbs */
+    .bg-orbs {
+      position: fixed; inset: 0; z-index: -2; overflow: hidden;
+      transition: opacity 0.5s;
+    }
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.12;
+      animation: orbFloat 20s ease-in-out infinite;
+    }
+    .bg-orb:nth-child(1) {
+      width: 600px; height: 600px;
+      background: #3b82f6;
+      top: -10%; left: -5%;
+      animation-duration: 25s;
+    }
+    .bg-orb:nth-child(2) {
+      width: 500px; height: 500px;
+      background: #8b5cf6;
+      top: 50%; right: -10%;
+      animation-duration: 20s;
+      animation-delay: -5s;
+    }
+    .bg-orb:nth-child(3) {
+      width: 400px; height: 400px;
+      background: #ec4899;
+      bottom: -5%; left: 30%;
+      animation-duration: 22s;
+      animation-delay: -10s;
+    }
+    .bg-orb:nth-child(4) {
+      width: 350px; height: 350px;
+      background: #06b6d4;
+      top: 30%; left: 50%;
+      animation-duration: 28s;
+      animation-delay: -7s;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      25% { transform: translate(30px, -40px) scale(1.05); }
+      50% { transform: translate(-20px, 20px) scale(0.95); }
+      75% { transform: translate(15px, 30px) scale(1.02); }
+    }
+    /* Noise overlay */
+    body::before {
+      content: "";
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      z-index: -1;
+      pointer-events: none;
+    }
+    body.gray {
+      --bg-color: #e2e8f0;
+      --card-bg: rgba(255,255,255,.7);
+      --card-border: rgba(0,0,0,.06);
+      --text-main: #0f172a;
+      --text-secondary: #64748b;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+    body.gray .bg-orb { opacity: 0.06; }
+    body.light {
+      --bg-color: #faf8ff;
+      --card-bg: rgba(255,255,255,.85);
+      --card-border: rgba(0,0,0,.06);
+      --text-main: #0f172a;
+      --text-secondary: #64748b;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+    }
+    body.light .bg-orb { opacity: 0.06; }
+    h1, h2, h3 { font-family: var(--font-header); letter-spacing: -0.02em; }
+    .glass-card {
+      background: var(--card-bg);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(.175,.885,.32,1.275);
+      position: relative;
+    }
+    .glass-card::before {
+      content: "";
+      position: absolute; inset: -1px;
+      border-radius: 21px;
+      background: linear-gradient(135deg, transparent, transparent);
+      z-index: -1;
+      transition: all 0.4s ease;
+      opacity: 0;
+    }
+    .glass-card:hover {
+      border-color: transparent;
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.1);
+    }
+    .glass-card:hover::before {
+      opacity: 1;
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(139,92,246,.3); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(139,92,246,.6); }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; }
+    .gradient-text {
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .tag {
+      font-size: .7rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: .3rem .8rem;
+      border-radius: 100px;
+      background: rgba(139,92,246,.08);
+      border: 1px solid rgba(139,92,246,.15);
+      color: #c4b5fd;
+      display: inline-block;
+      transition: all 0.3s;
+    }
+    body.light .tag, body.gray .tag {
+      background: rgba(99,102,241,.06);
+      border-color: rgba(99,102,241,.12);
+      color: #6366f1;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes shimmer {
+      0% { background-position: -200% center; }
+      100% { background-position: 200% center; }
+    }
+    @keyframes scaleIn {
+      from { opacity: 0; transform: scale(0.92) translateY(24px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.8; }
+    }
+    .fade-in-up { animation: fadeInUp 1s cubic-bezier(0.16,1,0.3,1) forwards; }
+    .card-animate {
+      opacity: 0;
+      animation: scaleIn 0.5s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+
+    /* Top bar */
+    .top-bar {
+      position: fixed;
+      top: 20px; right: 24px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-bar-glass {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 16px;
+      background: rgba(15,15,35,.6);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+    }
+    body.light .top-bar-glass, body.gray .top-bar-glass {
+      background: rgba(255,255,255,.7);
+      border-color: rgba(0,0,0,.06);
+      box-shadow: 0 8px 32px rgba(0,0,0,.08);
+    }
+    .search-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      color: rgba(255,255,255,.3);
+      display: flex;
+      pointer-events: none;
+      transition: color 0.3s;
+    }
+    body.light .search-icon, body.gray .search-icon { color: rgba(0,0,0,.3); }
+    .search-input {
+      padding: 10px 14px 10px 36px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      background: rgba(255,255,255,.06);
+      color: white;
+      width: 220px;
+      font-size: 0.85rem;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: var(--font-body);
+    }
+    .search-input:focus {
+      background: rgba(255,255,255,.1);
+      border-color: rgba(139,92,246,.4);
+      box-shadow: 0 0 0 3px rgba(139,92,246,.1);
+    }
+    body.light .search-input, body.gray .search-input {
+      background: rgba(0,0,0,.04);
+      color: #1e293b;
+    }
+    body.light .search-input:focus, body.gray .search-input:focus {
+      background: rgba(0,0,0,.06);
+      border-color: rgba(99,102,241,.3);
+      box-shadow: 0 0 0 3px rgba(99,102,241,.08);
+    }
+    .top-btn {
+      padding: 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,.06);
+      border: 1px solid transparent;
+      color: rgba(255,255,255,.7);
+      transition: all 0.3s;
+      font-family: var(--font-body);
+    }
+    body.light .top-btn, body.gray .top-btn {
+      background: rgba(0,0,0,.04);
+      color: #475569;
+    }
+    .top-btn:hover {
+      background: rgba(255,255,255,.12);
+      color: white;
+    }
+    body.light .top-btn:hover, body.gray .top-btn:hover {
+      background: rgba(0,0,0,.08);
+      color: #1e293b;
+    }
+
+    /* Header */
+    header {
+      padding-top: 120px;
+      text-align: center;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    .header-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px; height: 300px;
+      background: radial-gradient(ellipse, rgba(139,92,246,.15), transparent 70%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    header .header-tag {
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: .5rem 1.2rem;
+      border-radius: 100px;
+      background: linear-gradient(135deg, rgba(59,130,246,.12), rgba(139,92,246,.12));
+      border: 1px solid rgba(139,92,246,.2);
+      color: #a78bfa;
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+    body.light header .header-tag, body.gray header .header-tag {
+      background: linear-gradient(135deg, rgba(99,102,241,.08), rgba(139,92,246,.08));
+      border-color: rgba(99,102,241,.15);
+      color: #7c3aed;
+    }
+    header h1 {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.2em;
+      letter-spacing: -0.03em;
+    }
+    .ui-badge {
+      background: var(--accent-gradient);
+      color: white;
+      padding: 0.05em 0.35em;
+      border-radius: 0.25em;
+      display: inline-block;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(.175,.885,.32,1.275);
+      box-shadow: 0 4px 20px rgba(139,92,246,.4);
+      position: relative;
+    }
+    .ui-badge:hover {
+      transform: scale(1.08) rotate(-1deg);
+      box-shadow: 0 8px 30px rgba(139,92,246,.5);
+    }
+    header p {
+      color: var(--text-secondary);
+      font-size: 1.15rem;
+      max-width: 550px;
+      margin: 0 auto;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* Tabs */
+    .tabs-wrapper {
+      margin-bottom: 50px;
+      display: flex;
+      justify-content: center;
+    }
+    .tabs {
+      background: rgba(15,15,35,.5);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 6px;
+      border-radius: 16px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow: 0 4px 24px rgba(0,0,0,.2);
+    }
+    body.light .tabs, body.gray .tabs {
+      background: rgba(255,255,255,.7);
+      border-color: rgba(0,0,0,.05);
+      box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    }
+    .tab-btn {
+      padding: 10px 20px;
+      border-radius: 11px;
+      border: none;
+      background: transparent;
+      color: rgba(255,255,255,.45);
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: var(--font-body);
+      letter-spacing: 0.01em;
+      position: relative;
+    }
+    body.light .tab-btn, body.gray .tab-btn { color: #94a3b8; }
+    .tab-btn.active {
+      background: var(--accent-gradient);
+      color: white;
+      box-shadow: 0 4px 16px rgba(139,92,246,.45), inset 0 1px 0 rgba(255,255,255,.2);
+    }
+    .tab-btn .tab-count {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: rgba(255,255,255,.15);
+      padding: 1px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+    .tab-btn.active .tab-count {
+      background: rgba(255,255,255,.25);
+    }
+    .tab-btn:hover:not(.active) { color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); }
+    body.light .tab-btn:hover:not(.active), body.gray .tab-btn:hover:not(.active) {
+      color: #1e293b; background: rgba(0,0,0,.04);
+    }
+
+    /* Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 20px;
+    }
+
+    /* Card */
+    .lib-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: default;
+      border-radius: 20px;
+    }
+    /* Gradient border glow on hover */
+    .lib-card::before {
+      content: "";
+      position: absolute; inset: -1px;
+      border-radius: 21px;
+      padding: 1px;
+      background: linear-gradient(135deg, var(--card-glow, #3b82f6), transparent 60%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.4s;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .lib-card:hover::before { opacity: 0.7; }
+    /* Subtle inner glow */
+    .lib-card::after {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 140px;
+      background: linear-gradient(180deg, var(--card-glow-soft, rgba(59,130,246,.04)), transparent);
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 20px 20px 0 0;
+      transition: opacity 0.4s;
+      opacity: 0;
+    }
+    .lib-card:hover::after { opacity: 1; }
+    .lib-card > * { position: relative; z-index: 2; }
+    .lib-card .color-bar {
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      border-radius: 0 2px 2px 0;
+      z-index: 3;
+      opacity: 0.7;
+      transition: opacity 0.4s, width 0.4s;
+    }
+    .lib-card:hover .color-bar { opacity: 1; width: 4px; }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+    }
+    .card-icon {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .lib-card:hover .card-icon {
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 0 20px var(--card-glow-soft, rgba(59,130,246,.1));
+    }
+    body.light .card-icon, body.gray .card-icon {
+      background: rgba(0,0,0,.03);
+      border-color: rgba(0,0,0,.06);
+    }
+    .card-icon svg { width: 24px; height: 24px; }
+    .card-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .card-links a {
+      color: rgba(255,255,255,.35);
+      transition: all 0.3s;
+      display: flex;
+      padding: 4px;
+      border-radius: 6px;
+    }
+    .card-links a:hover {
+      color: var(--accent-color);
+      background: rgba(59,130,246,.1);
+    }
+    body.light .card-links a, body.gray .card-links a { color: #94a3b8; }
+    .category-badge {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      padding: 3px 10px;
+      border-radius: 20px;
+      background: var(--accent-gradient);
+      color: white;
+      box-shadow: 0 2px 8px rgba(139,92,246,.3);
+    }
+    .lib-card h3 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+    .lib-card .desc {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+      flex-grow: 1;
+    }
+    .tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 1.25rem;
+    }
+    .demo-btn {
+      width: 100%;
+      padding: 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.06);
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.7);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      letter-spacing: 0.01em;
+    }
+    body.light .demo-btn, body.gray .demo-btn {
+      background: rgba(0,0,0,.02);
+      border-color: rgba(0,0,0,.06);
+      color: #64748b;
+    }
+    .demo-btn:hover {
+      background: var(--accent-gradient);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(139,92,246,.3);
+      transform: translateY(-1px);
+    }
+
+    /* No results */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 100px 0;
+      color: rgba(255,255,255,.2);
+    }
+    body.light .no-results, body.gray .no-results { color: rgba(0,0,0,.2); }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background: rgba(3,0,20,.9);
+      backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .modal-content {
+      width: 100%;
+      max-width: 1200px;
+      height: 85vh;
+      background: #0a0a1a;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 30px 60px -12px rgba(0,0,0,.7), 0 0 40px rgba(139,92,246,.08);
+      transform: scale(0.92) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    .modal-overlay.active .modal-content {
+      transform: scale(1) translateY(0);
+    }
+    .modal-header {
+      padding: 1rem 1.5rem;
+      background: rgba(255,255,255,.02);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      color: white;
+    }
+    .modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .modal-header-left svg { width: 24px; height: 24px; }
+    .modal-header-right {
+      display: flex;
+      gap: 8px;
+    }
+    .modal-visit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--accent-gradient);
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(139,92,246,.3);
+    }
+    .modal-visit-btn:hover { box-shadow: 0 4px 16px rgba(139,92,246,.5); transform: translateY(-1px); }
+    .modal-close-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.7);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .modal-close-btn:hover { background: rgba(255,255,255,.1); color: white; }
+    .modal-body {
+      flex-grow: 1;
+      background: white;
+      position: relative;
+    }
+    .modal-body iframe {
+      width: 100%; height: 100%;
+      border: none;
+    }
+    .blocked-msg {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+      background: #0a0a1a;
+      color: #94a3b8;
+    }
+    .blocked-msg h4 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    .blocked-msg p { margin-bottom: 2rem; }
+    .blocked-msg .open-external {
+      padding: 14px 36px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--accent-gradient);
+      color: white;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+      box-shadow: 0 8px 24px rgba(139,92,246,.35);
+    }
+    .blocked-msg .open-external:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(139,92,246,.45);
+    }
+
+    /* Splash modal */
+    .splash-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(3,0,20,.92);
+      backdrop-filter: blur(14px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .splash-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .splash-content {
+      width: 100%;
+      max-width: 700px;
+      background: #0a0a1a;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.08);
+      overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0,0,0,.6), 0 0 50px rgba(139,92,246,.08);
+      transform: scale(0.92) translateY(30px);
+      transition: transform 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+    body.light .splash-content { background: #fff; border-color: rgba(0,0,0,.06); }
+    body.gray .splash-content { background: #f1f5f9; border-color: rgba(0,0,0,.06); }
+    .splash-overlay.active .splash-content {
+      transform: scale(1) translateY(0);
+    }
+    .splash-image {
+      width: 100%;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: linear-gradient(135deg, #0f0720, #1a0a3e, #0f172a);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .splash-image .splash-emoji {
+      font-size: 4rem;
+      opacity: 0.4;
+      animation: float 4s ease-in-out infinite;
+    }
+    .splash-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(0,0,0,.4);
+      color: rgba(255,255,255,.8);
+      border: 1px solid rgba(255,255,255,.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+    .splash-close:hover { background: rgba(0,0,0,.6); color: white; }
+    .splash-body {
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .splash-body h2 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.2em;
+    }
+    .splash-body .splash-desc {
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .splash-tech {
+      padding: 1.5rem;
+      border-radius: 16px;
+      background: rgba(139,92,246,.04);
+      border: 1px solid rgba(139,92,246,.08);
+      margin-bottom: 1.5rem;
+    }
+    body.light .splash-tech, body.gray .splash-tech {
+      background: rgba(99,102,241,.04);
+      border-color: rgba(99,102,241,.08);
+    }
+    .splash-tech .label {
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #a78bfa;
+    }
+    body.light .splash-tech .label, body.gray .splash-tech .label { color: #7c3aed; }
+    .splash-tech .links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      opacity: 0.7;
+      font-size: 0.9rem;
+    }
+    .splash-tech .links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .splash-tech .links a:hover { color: var(--accent-color); }
+    .splash-footer {
+      font-size: 0.9rem;
+      opacity: 0.5;
+    }
+    .splash-footer a {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .splash-footer a:hover { color: var(--accent-color); }
+
+    /* Footer */
+    footer {
+      margin-top: 120px;
+      padding-bottom: 60px;
+      text-align: center;
+      opacity: 0.4;
+    }
+    footer .tech-links {
+      margin-bottom: 10px;
+      font-size: 0.85rem;
+      font-weight: 400;
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    footer a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: var(--accent-color); }
+    footer .author {
+      font-size: 0.9rem;
+    }
+    footer .author a {
+      font-weight: 600;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+    body.light footer .author a, body.gray footer .author a { border-bottom-color: rgba(0,0,0,.1); }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .top-bar { top: 12px; right: 12px; }
+      .top-bar-glass { padding: 6px 8px; gap: 6px; }
+      .search-input { width: 130px; font-size: 0.8rem; padding: 8px 10px 8px 32px; }
+      .tab-btn { padding: 8px 14px; font-size: 0.8rem; }
+      .tab-btn .tab-count { display: none; }
+      .card-grid { grid-template-columns: 1fr; }
+      header { padding-top: 90px; }
+      .lang-label { display: none; }
+      .header-glow { width: 300px; height: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Orbs -->
+  <div class="bg-orbs">
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+    <div class="bg-orb"></div>
+  </div>
+
+  <!-- Top Bar -->
+  <div class="top-bar">
+   <div class="top-bar-glass">
+    <div class="search-wrapper">
+      <div class="search-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      </div>
+      <input type="text" class="search-input" id="searchInput" placeholder="라이브러리 검색...">
+    </div>
+    <button class="top-btn" id="langBtn" title="Switch to English">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>
+      <span class="lang-label" style="margin-left:8px;font-size:0.8rem;font-weight:700">KO</span>
+    </button>
+    <button class="top-btn" id="themeBtn">
+      <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+      <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+      <svg id="monitorIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><rect width="20" height="14" x="2" y="3" rx="2"/><line x1="8" x2="16" y1="21" y2="21"/><line x1="12" x2="12" y1="17" y2="21"/></svg>
+    </button>
+   </div>
+  </div>
+
+  <!-- Header -->
+  <header class="container fade-in-up">
+    <div class="header-glow"></div>
+    <div class="header-tag animate-float" id="headerTag">선별된 프리미엄 라이브러리</div>
+    <h1>
+      Ultimate
+      <span class="ui-badge" id="uiBadge">UI</span>
+      <span class="gradient-text" style="font-weight:300" id="showcaseText">Showcase</span>
+    </h1>
+    <p id="subtitleText">현대 웹 개발을 선도하는 프리미엄 리소스들을 탐색하고 영감을 얻으세요.</p>
+  </header>
+
+  <!-- Tabs -->
+  <div class="container tabs-wrapper">
+    <div class="tabs" id="tabsContainer"></div>
+  </div>
+
+  <!-- Card Grid -->
+  <main class="container">
+    <div class="card-grid" id="cardGrid"></div>
+  </main>
+
+  <!-- Demo Modal -->
+  <div class="modal-overlay" id="demoModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <span id="modalIcon"></span>
+          <h3 id="modalTitle"></h3>
+        </div>
+        <div class="modal-header-right">
+          <a id="modalVisit" class="modal-visit-btn" target="_blank" rel="noreferrer" title="">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+          </a>
+          <button class="modal-close-btn" id="modalCloseBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Splash Modal -->
+  <div class="splash-overlay" id="splashModal">
+    <div class="splash-content">
+      <div class="splash-image">
+        <span class="splash-emoji">✨</span>
+        <button class="splash-close" id="splashCloseBtn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+      </div>
+      <div class="splash-body">
+        <h2>
+          Ultimate
+          <span style="background:var(--accent-gradient);color:white;padding:0 0.3em;border-radius:0.3em;display:inline-block">UI</span>
+          <span class="gradient-text" style="font-weight:300" id="splashShowcase">Showcase</span>
+        </h2>
+        <p class="splash-desc">Experience the future of web design with curated premium resources.</p>
+        <div class="splash-tech">
+          <p class="label">Tech Stack</p>
+          <div class="links">
+            <a href="https://react.dev/" target="_blank" rel="noreferrer">React</a> &middot;
+            <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">Vite</a> &middot;
+            <a href="https://www.framer.com/motion/" target="_blank" rel="noreferrer">Framer Motion</a> &middot;
+            <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">Tailwind CSS</a> &middot;
+            <a href="https://lucide.dev/" target="_blank" rel="noreferrer">Lucide Icons</a>
+          </div>
+        </div>
+        <div class="splash-footer">
+          <a href="mailto:jvisualschool@gmail.com">Jaiwoo Shim</a> <span id="splashCopyright">&copy; 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="container">
+    <div class="tech-links">
+      <a href="https://react.dev/" target="_blank" rel="noreferrer">React</a> &middot;
+      <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">Vite</a> &middot;
+      <a href="https://www.framer.com/motion/" target="_blank" rel="noreferrer">Framer Motion</a> &middot;
+      <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">Tailwind CSS</a> &middot;
+      <a href="https://lucide.dev/" target="_blank" rel="noreferrer">Lucide Icons</a>
+    </div>
+    <p class="author">
+      <a href="mailto:jvisualschool@gmail.com">Jaiwoo Shim</a> <span id="footerCopyright">&copy; 2026</span>
+    </p>
+  </footer>
+
+<script>
+// ============ ICONS (SVG strings) ============
+const ICONS = {
+  star: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>',
+  palette: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>',
+  layers: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22.54 12.43-1.96-.89L12 15.69l-8.58-4.15-1.96.89a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22.54 16.43-1.96-.89L12 19.69l-8.58-4.15-1.96.89a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/></svg>',
+  layout: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>',
+  code: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>',
+  sparkles: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>',
+  leaf: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 20 7.4 20 7.4S22.3 12 20.3 17.7A7 7 0 0 1 11 20z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>',
+  globe: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
+  zap: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+  type: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" x2="15" y1="20" y2="20"/><line x1="12" x2="12" y1="4" y2="20"/></svg>',
+  barChart: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 16h.01"/><path d="M11 12h.01"/><path d="M15 8h.01"/><path d="M19 4h.01"/></svg>',
+  bookOpen: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  pieChart: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>',
+  newspaper: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>',
+  externalLink: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>',
+  github: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>',
+  shield: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+  search: '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+  play: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>'
+};
+
+// ============ i18n ============
+const i18n = {
+  ko: {
+    tag: "선별된 프리미엄 라이브러리",
+    showcase: "Showcase",
+    subtitle: "현대 웹 개발을 선도하는 프리미엄 리소스들을 탐색하고 영감을 얻으세요.",
+    demo: "라이브 데모",
+    openExternal: "새 탭에서 열기",
+    blockedMsg: "보안 정책으로 인해 이 사이트는 프레임에서 직접 열 수 없습니다.",
+    visit: "공식 사이트 방문",
+    close: "닫기",
+    cssTab: "CSS 라이브러리",
+    iconTab: "아이콘셋",
+    systemTab: "디자인 시스템",
+    heroTab: "히어로 영역",
+    fontTab: "웹폰트",
+    microTab: "마이크로 인터랙션",
+    vizTab: "데이터 시각화",
+    searchPlaceholder: "라이브러리 검색...",
+    noResults: "검색 결과가 없습니다.",
+    copyright: "\u00a9 2026"
+  },
+  en: {
+    tag: "Curated Premium Libraries",
+    showcase: "Showcase",
+    subtitle: "Explore and get inspired by premium resources leading modern web development.",
+    demo: "Live Demo",
+    openExternal: "Open in New Tab",
+    blockedMsg: "Due to security policies, this site cannot be opened directly in a frame.",
+    visit: "Visit Official Site",
+    close: "Close",
+    cssTab: "CSS Libraries",
+    iconTab: "Icon Sets",
+    systemTab: "Design Systems",
+    heroTab: "Hero Resources",
+    fontTab: "Webfonts",
+    microTab: "Micro-interactions",
+    vizTab: "Data Visualization",
+    searchPlaceholder: "Search resources...",
+    noResults: "No results found.",
+    copyright: "\u00a9 2026"
+  }
+};
+
+// ============ DATA ============
+const blockedIds = ["googleicons","fontawesome","remix","bootstrap","google_fonts","adobe_fonts","naver_fonts","woowahan","material","apple","carbon","atlassian","polaris","fluent","antdesign_system","unsplash","pexels","pixabay","adobe_color","noonnu","uiverse","lordicon","animista","happyhues","bgjar","vantajs","gradients_fm","dafont","fontpair","observable","pudding","infobeautiful","flowingdata","visualcinnamon","ncase","distill","d3gallery","datavizproject","tulp","tabler","iconly","ds_gallery","adele","ds_handbook","laws_of_ux","pencil"];
+
+const cssLibs = [
+  {id:"aceternity",name:"Aceternity UI",url:"https://ui.aceternity.com/",github:"https://github.com/aceternity",demoUrl:"https://ui.aceternity.com/components",description:"압도적인 애니메이션과 우아한 고급 인터랙션을 제공합니다. 현대적이고 미래지향적인 웹을 위한 최적의 선택.",descriptionEn:"Provides overwhelming animations and elegant advanced interactions. Best choice for modern and futuristic web.",tags:["Framer Motion","Modern","Premium"],color:"#00f2ff",icon:"star"},
+  {id:"daisyui",name:"DaisyUI",url:"https://daisyui.com/",github:"https://github.com/saadeghi/daisyui",demoUrl:"https://daisyui.com/components/",description:"가장 인기 있는 Tailwind CSS 컴포넌트 라이브러리. HTML 클래스만으로 아름다운 UI를 구현합니다.",descriptionEn:"The most popular Tailwind CSS component library. Implements beautiful UI with HTML classes alone.",tags:["Tailwind CSS","Accessible","CSS-only"],color:"#570df8",icon:"palette"},
+  {id:"flyonui",name:"FlyonUI",url:"https://flyonui.com/",github:"https://github.com/themeselection/flyonui",demoUrl:"https://flyonui.com/components/",description:"Tailwind CSS에 Preline UI의 검증된 로직을 결합한 통합 컴포넌트 라이브러리.",descriptionEn:"A combined component library that merges Tailwind CSS with proven logic from Preline UI.",tags:["Tailwind CSS","JS Components","Fast"],color:"#8b5cf6",icon:"layers"},
+  {id:"heroui",name:"HeroUI (NextUI)",url:"https://www.heroui.com/",github:"https://github.com/nextui-org/nextui",demoUrl:"https://www.heroui.com/docs/components/button",description:"놀라운 디자인 완성도와 직관적인 개발자 경험을 선사하는 React UI 라이브러리.",descriptionEn:"A React UI library that delivers stunning design quality and intuitive developer experience.",tags:["Design System","React","Themable"],color:"#0070f3",icon:"layout"},
+  {id:"hyperui",name:"HyperUI",url:"https://www.hyperui.dev/",github:"https://github.com/markmead/hyperui",demoUrl:"https://www.hyperui.dev/components",description:"복사 붙여넣기만으로 즉시 사용 가능한 무료 Tailwind CSS 컴포넌트 컬렉션.",descriptionEn:"A collection of free Tailwind CSS components ready for immediate use via copy-paste.",tags:["Copy-Paste","Tailwind","Lightweight"],color:"#ef4444",icon:"code"},
+  {id:"magicui",name:"Magic UI",url:"https://magicui.design/",github:"https://github.com/magicuidesign/magicui",demoUrl:"https://magicui.design/docs",description:"최고의 랜딩 페이지 구성을 위한 디자인 엔지니어 라이브러리. 시선을 사로잡는 화려한 구성 요소 모음.",descriptionEn:"Design engineer library for building top-tier landing pages. A collection of eye-catching animated components.",tags:["Landing Page","Animated","React"],color:"#fbbf24",icon:"zap"},
+  {id:"originui",name:"Origin UI",url:"https://originui.com/",github:"https://github.com/origin-ui/origin-ui",demoUrl:"https://originui.com/components",description:"작지만 강력한 마이크로 인터랙션과 고품질의 기본 컴포넌트들을 제공합니다.",descriptionEn:"Provides small but powerful micro-interactions and high-quality core components.",tags:["Radix UI","Micro-interactions","Clean"],color:"#ec4899",icon:"sparkles"},
+  {id:"parkui",name:"Park UI",url:"https://park-ui.com/",github:"https://github.com/park-ui/park-ui",demoUrl:"https://park-ui.com/",description:"Ark UI와 Panda CSS 기반의 차세대 디자인 시스템. 현대적인 고성능 컴포넌트를 지향합니다.",descriptionEn:"A next-gen design system based on Ark UI and Panda CSS. Aims for modern high-performance components.",tags:["Ark UI","Panda CSS","Next-gen"],color:"#10b981",icon:"leaf"},
+  {id:"preline",name:"Preline UI",url:"https://preline.co/",github:"https://github.com/htmlstreamofficial/preline",demoUrl:"https://preline.co/examples.html",description:"Tailwind CSS 기반의 방대한 오픈소스 컴포넌트 라이브러리. 실무용 대시보드와 웹앱에 최적화.",descriptionEn:"A massive open-source component library based on Tailwind CSS. Optimized for real-world dashboards and web apps.",tags:["Tailwind CSS","Enterprise","Components"],color:"#6366f1",icon:"globe"},
+  {id:"radixui",name:"Radix UI",url:"https://www.radix-ui.com/",github:"https://github.com/radix-ui/primitives",demoUrl:"https://www.radix-ui.com/primitives",description:"접근성과 커스텀 편의성에 집중한 무기체(Unstyled) 라이브러리. 완벽한 제어권을 보장합니다.",descriptionEn:"An unstyled library focused on accessibility and customization convenience. Ensures complete control.",tags:["Unstyled","Accessible","Headless"],color:"#ffffff",icon:"layers"},
+  {id:"shadcnui",name:"shadcn/ui",url:"https://ui.shadcn.com/",github:"https://github.com/shadcn/ui",demoUrl:"https://ui.shadcn.com/docs/components/accordion",description:"코드를 직접 소유하고 커스터마이징하는 새로운 방식의 컴포넌트 라이브러리. Radix UI와 Tailwind의 완벽한 조합.",descriptionEn:"A new way to own and customize components. The perfect combination of Radix UI and Tailwind CSS.",tags:["Components","Radix UI","Copy-Paste"],color:"#ffffff",icon:"layers"},
+  {id:"tailwind",name:"Tailwind CSS",url:"https://tailwindcss.com/",github:"https://github.com/tailwindlabs/tailwindcss",demoUrl:"https://tailwindcss.com/docs",description:"현대적인 웹 개발의 표준이 된 유틸리티 퍼스트 CSS 프레임워크. 비교할 수 없는 생산성을 제공합니다.",descriptionEn:"The utility-first CSS framework that has become the standard for modern web development.",tags:["Framework","Utility-first","Popular"],color:"#06b6d4",icon:"code"},
+  {id:"component_gallery",name:"Component Gallery",url:"https://component.gallery/",demoUrl:"https://component.gallery/",description:"전 세계 다양한 디자인 시스템의 핵심 컴포넌트들을 분류하여 보여주는 최고의 레퍼런스 갤러리.",descriptionEn:"The ultimate reference gallery showcasing and categorizing core components from various design systems worldwide.",tags:["Reference","UI Components","Gallery"],color:"#3B82F6",icon:"layout"}
+];
+
+const iconLibs = [
+  {id:"fontawesome",name:"Font Awesome",url:"https://fontawesome.com/",demoUrl:"https://fontawesome.com/icons",description:"무료 2,000+, Pro 16,000+ 이상의 방대한 아이콘을 제공하는 가장 유명한 라이브러리.",descriptionEn:"The most famous icon library offering 2,000+ free and 16,000+ pro icons.",tags:["Popular","CDN","Webfont"],color:"#3399FF",icon:"star"},
+  {id:"googleicons",name:"Google Material Icons",url:"https://fonts.google.com/icons",demoUrl:"https://fonts.google.com/icons",description:"구글에서 제작한 2,500+ 이상의 현대적이고 심플한 아이콘셋. 5가지 스타일 제공.",descriptionEn:"2,500+ modern, simple icons crafted by Google with 5 different styles.",tags:["Google","Simplified","Material"],color:"#EA4335",icon:"globe"},
+  {id:"lucide",name:"Lucide Icons",url:"https://lucide.dev/",demoUrl:"https://lucide.dev/icons/",github:"https://github.com/lucide-icons/lucide",description:"깔끔한 디자인과 React, Vue 등 다양한 프레임워크를 완벽 지원하는 1,400+ 아이콘.",descriptionEn:"1,400+ clean icons with perfect support for React, Vue, and other frameworks.",tags:["Modern","React","Open Source"],color:"#F59E0B",icon:"star"},
+  {id:"heroicons",name:"Heroicons",url:"https://heroicons.com/",demoUrl:"https://heroicons.com/",github:"https://github.com/tailwindlabs/heroicons",description:"Tailwind CSS 팀에서 제작한 고품질 커스텀 SVG 아이콘 모음.",descriptionEn:"A collection of high-quality custom SVG icons crafted by the Tailwind CSS team.",tags:["Tailwind","SVG","Official"],color:"#0EA5E9",icon:"code"},
+  {id:"phosphor",name:"Phosphor Icons",url:"https://phosphoricons.com/",demoUrl:"https://phosphoricons.com/",github:"https://github.com/phosphor-icons/core",description:"9,072개 이상의 방대한 아이콘과 6가지의 굵기별 스타일을 지원합니다.",descriptionEn:"Supports 9,072+ icons with 6 distinct weight styles.",tags:["Massive","Versatile","Stylish"],color:"#6366F1",icon:"layers"},
+  {id:"tabler",name:"Tabler Icons",url:"https://tabler.io/icons",demoUrl:"https://tabler.io/icons",github:"https://github.com/tabler/tabler-icons",description:"5,200개 이상의 정교한 SVG 아이콘을 MIT 라이선스로 자유롭게 사용하세요.",descriptionEn:"Use 5,200+ sophisticated SVG icons freely with MIT license.",tags:["MIT","SVG","Clean"],color:"#206BC4",icon:"leaf"},
+  {id:"feather",name:"Feather Icons",url:"https://feathericons.com/",demoUrl:"https://feathericons.com/",github:"https://github.com/feathericons/feather",description:"단순함을 지향하는 287개의 미니멀하고 아름다운 오픈소스 아이콘.",descriptionEn:"287 minimal and beautiful open-source icons for simplicity.",tags:["Minimal","Simple","Open Source"],color:"#10B981",icon:"star"},
+  {id:"iconoir",name:"Iconoir",url:"https://iconoir.com/",demoUrl:"https://iconoir.com/",github:"https://github.com/iconoir-icons/iconoir",description:"1,500개 이상의 유니크한 오픈소스 라이브러리로 어떠한 라이브러리도 필요 없습니다.",descriptionEn:"1,500+ unique open-source icons with no external dependencies required.",tags:["Unique","SVG","No Dep"],color:"#6366F1",icon:"layers"},
+  {id:"remix",name:"Remix Icon",url:"https://remixicon.com/",demoUrl:"https://remixicon.com/",github:"https://github.com/Remix-Design/RemixIcon",description:"디자이너와 개발자를 위한 2,800개 이상의 오픈소스 정교한 중립적 아이콘.",descriptionEn:"2,800+ neutral open-source icons crafted for designers and developers.",tags:["Neutral","Comprehensive","Open"],color:"#5F5BD7",icon:"layout"},
+  {id:"bootstrap",name:"Bootstrap Icons",url:"https://icons.getbootstrap.com/",demoUrl:"https://icons.getbootstrap.com/",github:"https://github.com/twbs/icons",description:"Bootstrap 테마에 최적화된 2,000개 이상의 공식 SVG 아이콘.",descriptionEn:"2,000+ official SVG icons optimized for Bootstrap themes.",tags:["Bootstrap","Standard","Official"],color:"#7952B3",icon:"layers"},
+  {id:"icon_kitchen",name:"Icon Kitchen",url:"https://icon.kitchen/",demoUrl:"https://icon.kitchen/",description:"Android, iOS, 웹을 위한 앱 아이콘을 쉽고 빠르게 생성할 수 있는 도구.",descriptionEn:"A tool to quickly and easily generate app icons for Android, iOS, and the Web.",tags:["Generator","App Icons","Tool"],color:"#6a3de8",icon:"star"},
+  {id:"emojikitchen",name:"Emoji Kitchen",url:"https://emojikitchen.dev/",demoUrl:"https://emojikitchen.dev/",description:"구글 이모지 키친의 공식 웹 버전. 두 개의 이모지를 조합하여 나만의 특별한 스티커를 만드세요.",descriptionEn:"The official web version of Google's Emoji Kitchen. Combine two emojis to create your own unique stickers.",tags:["Emoji","Creative","Stickers"],color:"#FFCC22",icon:"star"},
+  {id:"iconly",name:"Iconly",url:"https://iconly.pro/",demoUrl:"https://iconly.pro/",description:"5가지 스타일로 제공되는 600+ 필수 아이콘과 트렌디한 3D 아이콘 컬렉션.",descriptionEn:"600+ essential icons in 5 styles, plus a trendy 3D icon collection.",tags:["3D Icons","5 Styles","Trendy"],color:"#2F2F2F",icon:"leaf"}
+];
+
+const systemLibs = [
+  {id:"material",name:"Material Design",url:"https://m3.material.io/",demoUrl:"https://m3.material.io/",description:"구글의 차세대 디자인 시스템. 모바일과 데스크톱을 아우르는 일관된 사용자 경험을 선사합니다.",descriptionEn:"Google's next-generation design system, delivering consistent UX across mobile and desktop.",tags:["Google","M3","Comprehensive"],color:"#4285F4",icon:"star"},
+  {id:"apple",name:"Apple HIG",url:"https://developer.apple.com/design/human-interface-guidelines/",demoUrl:"https://developer.apple.com/design/human-interface-guidelines/",description:"Apple 플랫폼의 디자인 원칙. iOS, macOS 등 전 제품군에 걸친 사용자 중심의 인터페이스 가이드.",descriptionEn:"Design principles for Apple platforms, ensuring user-centered interfaces across iOS and macOS.",tags:["Apple","Premium","Principles"],color:"#000000",icon:"globe"},
+  {id:"carbon",name:"IBM Carbon",url:"https://carbondesignsystem.com/",demoUrl:"https://carbondesignsystem.com/",description:"IBM의 엔터프라이즈급 오픈소스 디자인 시스템. 정교한 데이터 시각화와 접근성이 특징입니다.",descriptionEn:"IBM's enterprise-grade open-source design system, featuring sophisticated data visualization.",tags:["IBM","Enterprise","Accessible"],color:"#0F62FE",icon:"layers"},
+  {id:"atlassian",name:"Atlassian Design",url:"https://atlassian.design/",demoUrl:"https://atlassian.design/",description:"Jira와 Confluence를 지탱하는 협업 최적화 디자인 가이드라인. 실무 중심의 패턴을 제공합니다.",descriptionEn:"Collaboration-optimized design guidelines behind Jira and Confluence, providing practical patterns.",tags:["Atlassian","Productivity","Patterns"],color:"#0052CC",icon:"leaf"},
+  {id:"polaris",name:"Shopify Polaris",url:"https://polaris.shopify.com/",demoUrl:"https://polaris.shopify.com/",description:"이커머스 경험을 위한 완벽한 프레임워크. 판매자와 구매자 모두를 고려한 UX 가이드를 제공합니다.",descriptionEn:"A complete framework for e-commerce, offering UX guides for both merchants and customers.",tags:["Shopify","E-commerce","UX"],color:"#95BF47",icon:"layout"},
+  {id:"fluent",name:"Microsoft Fluent",url:"https://fluent2.microsoft.design/",demoUrl:"https://fluent2.microsoft.design/",description:"차세대 윈도우와 오피스를 위한 마이크로소프트의 디자인 언어. 빛, 깊이, 모션을 강조합니다.",descriptionEn:"Microsoft's design language for Windows and Office, emphasizing light, depth, and motion.",tags:["Microsoft","Fluent","3D Mono"],color:"#0078D4",icon:"star"},
+  {id:"antdesign_system",name:"Ant Design",url:"https://ant.design/",demoUrl:"https://ant.design/",description:"엔터프라이즈급 웹 애플리케이션을 위한 강력한 디자인 언어. 정교한 컴포넌트 생태계를 갖췄습니다.",descriptionEn:"A powerful design language for enterprise-level web apps with a sophisticated component ecosystem.",tags:["Alibaba","Enterprise","Standard"],color:"#1890FF",icon:"layers"},
+  {id:"ds_gallery",name:"Design Systems Repo",url:"https://designsystemsrepo.com/",demoUrl:"https://designsystemsrepo.com/",description:"500개 이상의 다양한 기업 디자인 시스템 사례를 한곳에서 볼 수 있는 통합 저장소.",descriptionEn:"A comprehensive repository featuring over 500 design system examples from various companies.",tags:["Collection","Catalog","Resource"],color:"#F06292",icon:"layout"},
+  {id:"adele",name:"Adele",url:"https://adele.uxpin.com/",demoUrl:"https://adele.uxpin.com/",description:"공개된 디자인 시스템 라이브러리들의 데이터베이스. 기술 스택과 기능을 한눈에 비교하세요.",descriptionEn:"A database of public design systems. Compare tech stacks and features at a glance.",tags:["Database","Comparison","UXPin"],color:"#FF4100",icon:"code"},
+  {id:"ds_handbook",name:"DS Handbook",url:"https://www.designbetter.co/design-systems-handbook",demoUrl:"https://www.designbetter.co/design-systems-handbook",description:"성공적인 디자인 시스템 구축을 위한 가이드북. 기초부터 고급 전략까지 상세히 다룹니다.",descriptionEn:"A comprehensive guide for building successful design systems, from basics to advanced strategies.",tags:["E-book","Education","Strategy"],color:"#FFC107",icon:"star"},
+  {id:"laws_of_ux",name:"Laws of UX",url:"https://lawsofux.com/",demoUrl:"https://lawsofux.com/",description:"디자이너가 사용자 인터페이스를 만들 때 참고하는 최적의 심리학적 원칙 모음.",descriptionEn:"A collection of the psychological principles that designers reference when building interfaces.",tags:["Psychology","UX Principles","Guide"],color:"#212121",icon:"bookOpen"},
+  {id:"pencil",name:"Pencil",url:"https://www.pencil.dev/",demoUrl:"https://www.pencil.dev/",description:"캔버스 위에서 디자인하고 즉시 코드로 변환하는 AI 기반 디자인 도구. 프런트엔드 개발의 새로운 흐름을 경험하세요.",descriptionEn:"AI-powered design tool to design on canvas and land in code. Experience the new flow of frontend development.",tags:["AI Design","Design-to-Code","Canvas"],color:"#000000",icon:"star"}
+];
+
+const heroLibs = [
+  {id:"unsplash",name:"Unsplash",url:"https://unsplash.com/",demoUrl:"https://unsplash.com/",description:"500만+ 고해상도 무료 이미지. 상업적 이용 가능, 저작권 표시 불필요.",descriptionEn:"5M+ high-resolution free images. Commercial use allowed, no attribution required.",tags:["Images","HD","Free"],color:"#000000",icon:"layout"},
+  {id:"pexels",name:"Pexels",url:"https://www.pexels.com/",demoUrl:"https://www.pexels.com/",description:"수백만 개 무료 스톡 사진 및 비디오. API 제공, 완전 무료.",descriptionEn:"Millions of free stock photos and videos. API available, completely free.",tags:["Photos","Videos","Free"],color:"#05A081",icon:"globe"},
+  {id:"pixabay",name:"Pixabay",url:"https://pixabay.com/",demoUrl:"https://pixabay.com/",description:"460만+ 이미지 및 비디오. AI 생성 이미지도 포함되어 있습니다.",descriptionEn:"4.6M+ images and videos. AI-generated images also included.",tags:["Images","AI","Free"],color:"#2EC66D",icon:"star"},
+  {id:"coolors_grad",name:"Coolors Gradients",url:"https://coolors.co/gradients",demoUrl:"https://coolors.co/gradients",description:"수천 개의 선별된 그라데이션 팔레트. 색상 조합 생성기 포함.",descriptionEn:"Thousands of curated gradient palettes. Color combination generator included.",tags:["Gradients","Colors","Tool"],color:"#0066FF",icon:"palette"},
+  {id:"webgradients",name:"WebGradients",url:"https://webgradients.com/",demoUrl:"https://webgradients.com/",description:"180개 선별된 그라데이션. CSS/PNG 다운로드 및 디자인 툴 플러그인 지원.",descriptionEn:"180 curated gradients. CSS/PNG download and design tool plugins supported.",tags:["CSS Gradients","Design","Easy"],color:"#FF9A9E",icon:"layers"},
+  {id:"grad_hunt",name:"Gradient Hunt",url:"https://gradienthunt.com/",demoUrl:"https://gradienthunt.com/",description:"커뮤니티 기반 그라데이션 컬렉션. 트렌디한 색상 조합을 탐색하세요.",descriptionEn:"Community-based gradient collection. Explore trendy color combinations.",tags:["Community","Trending","Gradients"],color:"#2C3E50",icon:"sparkles"},
+  {id:"css_grad",name:"CSS Gradient",url:"https://cssgradient.io/",demoUrl:"https://cssgradient.io/",description:"실시간 그라데이션 생성기. Linear, Radial, Conic 스타일 지원.",descriptionEn:"Real-time gradient generator. Supports Linear, Radial, and Conic styles.",tags:["Tool","Generator","CSS"],color:"#4FC3F7",icon:"code"},
+  {id:"adobe_color",name:"Adobe Color",url:"https://color.adobe.com/",demoUrl:"https://color.adobe.com/",description:"AI 기반 색상 조합 생성 및 이미지에서 팔레트 추출 기능을 제공합니다.",descriptionEn:"AI-based color wheel and palette extraction from images.",tags:["Adobe","AI","Palettes"],color:"#FF0000",icon:"palette"},
+  {id:"happyhues",name:"Happy Hues",url:"https://www.happyhues.co/",demoUrl:"https://www.happyhues.co/",description:"실제 웹사이트 예제와 함께 팔레트별 적용 사례를 확인하세요.",descriptionEn:"See palette applications with real-world website examples.",tags:["UX","Palettes","Visual"],color:"#6366F1",icon:"layout"},
+  {id:"heropatterns",name:"Hero Patterns",url:"https://heropatterns.com/",demoUrl:"https://heropatterns.com/",description:"SVG 배경 패턴 생성기. Tailwind CSS와 완벽하게 호환됩니다.",descriptionEn:"SVG background pattern generator. Perfectly compatible with Tailwind CSS.",tags:["Patterns","Backgrounds","SVG"],color:"#5850EC",icon:"layers"},
+  {id:"bgjar",name:"BGJar",url:"https://bgjar.com/",demoUrl:"https://bgjar.com/",description:"Blob, Wave, Pattern 등 12가지 이상의 SVG 배경을 생성합니다.",descriptionEn:"Generate Blob, Wave, Pattern, and 12+ other SVG backgrounds.",tags:["SVG","Abstract","Backgrounds"],color:"#F472B6",icon:"star"},
+  {id:"vantajs",name:"Vanta.js",url:"https://www.vantajs.com/",demoUrl:"https://www.vantajs.com/",description:"복잡한 설정 없이 사용 가능한 3D 애니메이션 배경 효과 라이브러리.",descriptionEn:"3D animated background effects library ready for use with minimal setup.",tags:["3D","Animation","Background"],color:"#FF3F81",icon:"zap"},
+  {id:"grainient",name:"Grainient",url:"https://grainient.supply/",demoUrl:"https://grainient.supply/",description:"노이즈가 섞인 독특하고 감각적인 메시 그라데이션 소스 모음. 세련된 히어로 영역을 위한 필수 리소스.",descriptionEn:"A collection of unique, grainy mesh gradient sources. Essential resource for sophisticated hero sections.",tags:["Mesh Gradients","Grainy","Modern"],color:"#F97316",icon:"palette"},
+  {id:"gradients_fm",name:"Gradients.fm",url:"https://www.gradients.fm/",demoUrl:"https://www.gradients.fm/",description:"트렌디한 색상 조합을 즉시 확인할 수 있는 고퀄리티 그라데이션 큐레이션 사이트입니다.",descriptionEn:"High-quality gradient curation site where you can instantly check trendy color combinations.",tags:["Curation","Trending","Easy"],color:"#8B5CF6",icon:"star"}
+];
+
+const fontLibs = [
+  {id:"noonnu",name:"눈누 (Noonnu)",url:"https://noonnu.cc/",demoUrl:"https://noonnu.cc/",description:"한국 최고의 무료 폰트 아카이브. 1,500+ 한글 폰트와 상세한 라이선스 정보를 제공합니다.",descriptionEn:"Korea's best free font archive. Provides 1,500+ Korean fonts with detailed license info.",tags:["Korean","Free","Archive"],color:"#00D1B2",icon:"type"},
+  {id:"google_fonts",name:"Google Fonts",url:"https://fonts.google.com/",demoUrl:"https://fonts.google.com/",description:"1,500+ 무료 오픈소스 폰트. 글로벌 표준 웹폰트 서비스로 빠른 로딩 속도를 보장합니다.",descriptionEn:"1,500+ free open-source fonts. Global standard web font service with fast loading.",tags:["Google","Global","Standard"],color:"#EA4335",icon:"globe"},
+  {id:"adobe_fonts",name:"Adobe Fonts",url:"https://fonts.adobe.com/",demoUrl:"https://fonts.adobe.com/",description:"20,000+ 프리미엄 폰트 컬렉션. Adobe CC 구독자라면 무제한으로 사용 가능합니다.",descriptionEn:"20,000+ premium font collection. Unlimited access for Adobe CC subscribers.",tags:["Premium","Professional","Adobe"],color:"#FF0000",icon:"layout"},
+  {id:"font_squirrel",name:"Font Squirrel",url:"https://www.fontsquirrel.com/",demoUrl:"https://www.fontsquirrel.com/",description:"상업적 이용이 가능한 고품질 무료 폰트만 선별하여 제공합니다. 웹폰트 생성기 포함.",descriptionEn:"Hand-picked high-quality free fonts for commercial use. Includes web font generator.",tags:["Commercial","Free","Generator"],color:"#60584F",icon:"star"},
+  {id:"dafont",name:"DaFont",url:"https://www.dafont.com/",demoUrl:"https://www.dafont.com/",description:"80,000+ 방대한 폰트 라이브러리. 화려하고 독창적인 디스플레이 폰트가 가득합니다.",descriptionEn:"Massive library of 80,000+ fonts. Full of decorative and creative display fonts.",tags:["Massive","Category","Creative"],color:"#FF6600",icon:"palette"},
+  {id:"fontshare",name:"FontShare",url:"https://www.fontshare.com/",demoUrl:"https://www.fontshare.com/",description:"Indian Type Foundry 제공. 100% 무료이면서도 트렌디하고 세련된 상업용 폰트 모음.",descriptionEn:"Offered by Indian Type Foundry. 100% free, trendy and sophisticated commercial fonts.",tags:["Modern","Free","High-quality"],color:"#F59E0B",icon:"layers"},
+  {id:"bunny_fonts",name:"Bunny Fonts",url:"https://fonts.bunny.net/",demoUrl:"https://fonts.bunny.net/",description:"개인정보 보호를 중시하는 Google Fonts의 대안 서비스. GDPR을 완벽하게 준수합니다.",descriptionEn:"Privacy-first alternative to Google Fonts. Fully GDPR compliant.",tags:["Privacy","Google Alt","CDN"],color:"#FF3366",icon:"leaf"},
+  {id:"font_in_use",name:"Font In Use",url:"https://fontsinuse.com/",demoUrl:"https://fontsinuse.com/",description:"실제 디자인 작업물에서 폰트가 어떻게 사용되었는지 탐색하고 영감을 얻으세요.",descriptionEn:"Explore how fonts are used in real design projects and get inspired.",tags:["Inspiration","Case Study","Design"],color:"#212121",icon:"globe"},
+  {id:"naver_fonts",name:"네이버 글꼴",url:"https://hangeul.naver.com/",demoUrl:"https://hangeul.naver.com/",description:"나눔고딕, 나눔스퀘어 등 네이버가 제공하는 신뢰할 수 있는 무료 한글 글꼴 모음.",descriptionEn:"Reliable free Korean font collection by Naver, including Nanum series.",tags:["Naver","Korean","Standard"],color:"#28A745",icon:"layout"},
+  {id:"woowahan",name:"배달의민족 글꼴",url:"https://www.woowahan.com/fonts",demoUrl:"https://www.woowahan.com/fonts",description:"주아체, 한나체 등 독특한 감성으로 사랑받는 배민의 무료 한글 폰트 시리즈.",descriptionEn:"Popular free Korean font series by Baemin with unique emotions.",tags:["Branding","Korean","Famous"],color:"#2AC1BC",icon:"star"},
+  {id:"vfonts",name:"V-Fonts",url:"https://v-fonts.com/",demoUrl:"https://v-fonts.com/",description:"가변 폰트(Variable Fonts)의 가능성을 탐색하세요. 굵기와 폭을 자유자재로 조절 가능합니다.",descriptionEn:"Explore the possibilities of Variable Fonts. Adjust weight and width freely.",tags:["Variable","Future","Interactive"],color:"#6366F1",icon:"zap"},
+  {id:"fontpair",name:"FontPair",url:"https://www.fontpair.co/",demoUrl:"https://www.fontpair.co/",description:"제목과 본문에 어울리는 최적의 폰트 조합을 추천해주는 타이포그래피 도구.",descriptionEn:"Typography tool recommending perfect font pairings for heading and body.",tags:["Pairing","Typography","Tool"],color:"#4FC3F7",icon:"sparkles"}
+];
+
+const microLibs = [
+  {id:"aceternity_micro",name:"Aceternity UI",url:"https://ui.aceternity.com/components",demoUrl:"https://ui.aceternity.com/components",description:"카드 호버, 배경 효과 등 복사 붙여넣기 가능한 고급 React 애니메이션 컴포넌트.",descriptionEn:"Advanced copy-paste React animation components for card hover, backgrounds, etc.",tags:["Framer Motion","React","Premium"],color:"#00F2FF",icon:"star"},
+  {id:"magicui_micro",name:"Magic UI",url:"https://magicui.design/docs/components",demoUrl:"https://magicui.design/docs/components",description:"150개 이상의 텍스트 효과, 파티클 등 화려한 컴포넌트 모음. React + Tailwind CSS 기반.",descriptionEn:"150+ components with text effects, particles, etc. Based on React + Tailwind CSS.",tags:["Animation","Tailwind","React"],color:"#FBBF24",icon:"zap"},
+  {id:"reactbits_micro",name:"React Bits",url:"https://reactbits.dev/",demoUrl:"https://reactbits.dev/get-started/index",description:"오픈 소스 React 애니메이션 컴포넌트 컬렉션. 고품질의 인터랙티브하고 커스터마이징 가능한 UI 요소들을 제공합니다.",descriptionEn:"An open source collection of high quality, animated, interactive & fully customizable React components.",tags:["Animation","React","Premium"],color:"#3b82f6",icon:"star"},
+  {id:"hovercss",name:"Hover.css",url:"https://ianlunn.github.io/Hover/",demoUrl:"https://ianlunn.github.io/Hover/",description:"클래스 추가만으로 즉시 적용 가능한 100개 이상의 Pure CSS 호버 효과 컬렉션.",descriptionEn:"100+ Pure CSS hover effects ready via class additions.",tags:["CSS","Hover","Fast"],color:"#EC4899",icon:"sparkles"},
+  {id:"animista",name:"Animista",url:"https://animista.net/",demoUrl:"https://animista.net/play",description:"실시간 미리보기를 통해 나만의 CSS 애니메이션을 생성하고 코드를 즉시 복사하세요.",descriptionEn:"Create custom CSS animations with real-time preview and copy code instantly.",tags:["Generator","CSS","Real-time"],color:"#10B981",icon:"code"},
+  {id:"uiverse",name:"UIverse",url:"https://uiverse.io/",demoUrl:"https://uiverse.io/",description:"버튼, 로더, 카드 등 3,000개 이상의 오픈소스 UI 요소와 애니메이션 코드를 제공합니다.",descriptionEn:"Provides 3,000+ open-source UI elements and animation codes like buttons/loaders.",tags:["Community","CSS/Tailwind","Components"],color:"#3B82F6",icon:"layout"},
+  {id:"whirl",name:"Whirl",url:"https://whirl.netlify.app/",demoUrl:"https://whirl.netlify.app/",description:"106개의 정교한 Pure CSS 로딩 애니메이션. 별도의 라이브러리 없이 복사 사용 가능합니다.",descriptionEn:"106 sophisticated Pure CSS loaders. Copy-paste without external libraries.",tags:["Loaders","CSS","Performance"],color:"#8B5CF6",icon:"star"},
+  {id:"cssloaders_io",name:"CSS Loaders",url:"https://cssloaders.github.io/",demoUrl:"https://cssloaders.github.io/",description:"600개 이상의 방대한 SVG 및 CSS 기반 로딩 애니메이션 컬렉션.",descriptionEn:"Massive collection of 600+ SVG and CSS-based loading animations.",tags:["Loaders","SVG","Massive"],color:"#F472B6",icon:"zap"},
+  {id:"lordicon",name:"Lordicon",url:"https://lordicon.com/",demoUrl:"https://lordicon.com/",description:"1,500개 이상의 고품질 애니메이션 아이콘. Lottie와 GIF 등 다양한 포맷 지원.",descriptionEn:"1,500+ high-quality animated icons. Supports Lottie, GIF, and more.",tags:["Animated Icons","Lottie","UX"],color:"#FF3F81",icon:"layers"},
+  {id:"lucide_animated",name:"Lucide Animated",url:"https://lucide-animated.com/",demoUrl:"https://lucide-animated.com/",description:"Lucide 아이콘에 생동감을 불어넣는 애니메이션 아이콘 컬렉션. 상호작용이 즐거운 UI를 구축하세요.",descriptionEn:"A collection of animated icons that bring Lucide icons to life. Build interactive and joyful UIs.",tags:["Animated Icons","Lucide","Micro-interaction"],color:"#F59E0B",icon:"zap"},
+  {id:"buttons_gen",name:"Buttons Gen",url:"https://markodenic.com/tools/buttons-generator/",demoUrl:"https://markodenic.com/tools/buttons-generator/",description:"다양한 인터랙티브 버튼 효과를 실시간으로 확인하고 코드를 생성하세요.",descriptionEn:"Check various interactive button effects in real-time and generate code.",tags:["Buttons","Tool","Generator"],color:"#4FC3F7",icon:"sparkles"},
+  {id:"aos_lib",name:"AOS",url:"https://michalsnik.github.io/aos/",demoUrl:"https://michalsnik.github.io/aos/",description:"스크롤에 반응하여 요소가 멋지게 나타나는 표준 스크롤 애니메이션 라이브러리.",descriptionEn:"Standard scroll animation library for elements appearing on scroll.",tags:["Scroll","JS","UX"],color:"#000000",icon:"barChart"},
+  {id:"tsparticles",name:"tsParticles",url:"https://particles.js.org/",demoUrl:"https://particles.js.org/",description:"다양한 파티클 배경 효과를 생성하는 가장 강력한 자바스크립트 라이브러리.",descriptionEn:"The most powerful JS library for generating various particle background effects.",tags:["Particles","Background","Dynamic"],color:"#EA4335",icon:"star"},
+  {id:"autoanimate",name:"AutoAnimate",url:"https://auto-animate.formkit.com/",demoUrl:"https://auto-animate.formkit.com/",description:"코드 한 줄로 리스트나 요소의 변경을 마법처럼 부드럽게 만들어주는 애니메이션 도구.",descriptionEn:"An animation tool that makes list/element changes magically smooth with one line of code.",tags:["Zero-config","Smooth","Utility"],color:"#FFC107",icon:"zap"}
+];
+
+const vizLibs = [
+  {id:"bananax",name:"BananaX Infographic",url:"https://furoku.github.io/bananaX/projects/infographic-evaluation/en/",demoUrl:"https://furoku.github.io/bananaX/projects/infographic-evaluation/en/",description:"바나나X 프로젝트의 인포그래픽 평가 도구. 직관적이고 인터랙티브한 시각화 사례.",descriptionEn:"Infographic evaluation tool from the BananaX project. An intuitive and interactive visualization case.",tags:["Infographic","Evaluation","Interactive"],color:"#FFE135",icon:"pieChart"},
+  {id:"observable",name:"Observable",url:"https://observablehq.com/@observablehq/gallery",demoUrl:"https://observablehq.com/@observablehq/gallery",description:"D3.js 기반 인터랙티브 노트북. 실시간 데이터 시각화 편집과 커뮤니티 갤러리를 제공합니다.",descriptionEn:"D3.js-based interactive notebook. Features real-time data visualization editing and community gallery.",tags:["D3.js","Notebook","Collaborative"],color:"#212121",icon:"barChart"},
+  {id:"pudding",name:"The Pudding",url:"https://pudding.cool/",demoUrl:"https://pudding.cool/",description:"비주얼 에세이 형식의 창의적인 데이터 저널리즘. 스크롤 기반 스토리텔링의 정점.",descriptionEn:"Creative data journalism in visual essay format. The peak of scrollytelling.",tags:["Journalism","Storytelling","Creative"],color:"#000000",icon:"newspaper"},
+  {id:"infobeautiful",name:"Information is Beautiful",url:"https://informationisbeautiful.net/",demoUrl:"https://informationisbeautiful.net/",description:"수상 경력의 고품격 인포그래픽 모음. 복잡한 데이터를 아름답고 간결하게 시각화합니다.",descriptionEn:"Award-winning high-quality infographics. Visualizes complex data beautifully and concisely.",tags:["Infographic","Beautiful","Data-art"],color:"#FF3366",icon:"palette"},
+  {id:"flowingdata",name:"Flowing Data",url:"https://flowingdata.com/",demoUrl:"https://flowingdata.com/",description:"통계학자 Nathan Yau가 운영하는 데이터 시각화 전문 사이트. 다양한 사례와 튜토리얼 제공.",descriptionEn:"Data visualization site run by statistician Nathan Yau. Provides various cases and tutorials.",tags:["Statistics","Tutorials","Insights"],color:"#FFA500",icon:"barChart"},
+  {id:"visualcinnamon",name:"Visual Cinnamon",url:"https://www.visualcinnamon.com/",demoUrl:"https://www.visualcinnamon.com/",description:"Nadieh Bremer의 예술적 데이터 시각화 포트폴리오. D3.js 기반의 환상적인 작품들을 탐색하세요.",descriptionEn:"Artistic data visualization portfolio of Nadieh Bremer. Explore fantastic D3.js-based works.",tags:["D3.js","Artistic","Portfolio"],color:"#A260FF",icon:"star"},
+  {id:"ncase",name:"Explorable Explanations",url:"https://ncase.me/",demoUrl:"https://ncase.me/",description:"Nicky Case의 인터랙티브 설명 시스템. 복잡한 개념을 시각적 게임과 시뮬레이션으로 설명합니다.",descriptionEn:"Interactive explanations by Nicky Case. Explains complex concepts via visual games and simulations.",tags:["Interactive","Educational","Concept"],color:"#EA4335",icon:"bookOpen"},
+  {id:"distill",name:"Distill.pub",url:"https://distill.pub/",demoUrl:"https://distill.pub/",description:"머신러닝과 AI를 시각적으로 설명하는 인터랙티브 논문 플랫폼. 학술적 깊이와 시각적 명료함.",descriptionEn:"Interactive paper platform visually explaining ML and AI. Academic depth and visual clarity.",tags:["Machine Learning","AI","Academic"],color:"#00D1B2",icon:"code"},
+  {id:"d3gallery",name:"D3.js Gallery",url:"https://observablehq.com/@d3/gallery",demoUrl:"https://observablehq.com/@d3/gallery",description:"D3.js 창시자 Mike Bostock이 큐레이션한 수천 개의 데이터 시각화 라이브 예제.",descriptionEn:"Thousands of live data visualization examples curated by D3.js creator Mike Bostock.",tags:["D3.js","Examples","Mike Bostock"],color:"#F472B6",icon:"newspaper"},
+  {id:"datavizproject",name:"Dataviz Project",url:"https://datavizproject.com/",demoUrl:"https://datavizproject.com/",description:"데이터 유형에 가장 적합한 차트 타입을 추천해주는 가이드. 150개 이상의 시각화 기법.",descriptionEn:"A guide that recommends the best chart type for data types. 150+ visualization techniques.",tags:["Catalogue","Chart-types","Guide"],color:"#3B82F6",icon:"layout"},
+  {id:"tulp",name:"TULP Interactive",url:"https://tulpinteractive.com/",demoUrl:"https://tulpinteractive.com/",description:"데이터 아트 및 시각화 전문 스튜디오. 혁신적이고 창의적인 상업적 데이터 스토리텔링 사례.",descriptionEn:"Studio specialized in data art and visualization. Innovative and creative commercial data storytelling.",tags:["Studio","Creative","Commercial"],color:"#6366F1",icon:"layers"}
+];
+
+// ============ STATE ============
+let currentLang = 'ko';
+let currentTheme = 'dark';
+let currentTab = 'CSS';
+let searchQuery = '';
+
+// ============ CATEGORY MAP ============
+const tabMap = {
+  CSS: { data: cssLibs, labelKey: 'cssTab' },
+  ICON: { data: iconLibs, labelKey: 'iconTab' },
+  SYSTEM: { data: systemLibs, labelKey: 'systemTab' },
+  HERO: { data: heroLibs, labelKey: 'heroTab' },
+  FONT: { data: fontLibs, labelKey: 'fontTab' },
+  MICRO: { data: microLibs, labelKey: 'microTab' },
+  VIZ: { data: vizLibs, labelKey: 'vizTab' }
+};
+
+const allLibs = () => {
+  const t = i18n[currentLang];
+  const all = [];
+  for (const [key, val] of Object.entries(tabMap)) {
+    val.data.forEach(lib => all.push({ ...lib, category: t[val.labelKey] }));
+  }
+  return all;
+};
+
+// ============ DOM REFS ============
+const $ = id => document.getElementById(id);
+
+// ============ RENDER TABS ============
+function renderTabs() {
+  const t = i18n[currentLang];
+  const tabs = [
+    { id: 'CSS', label: t.cssTab },
+    { id: 'ICON', label: t.iconTab },
+    { id: 'SYSTEM', label: t.systemTab },
+    { id: 'HERO', label: t.heroTab },
+    { id: 'FONT', label: t.fontTab },
+    { id: 'MICRO', label: t.microTab },
+    { id: 'VIZ', label: t.vizTab }
+  ];
+  $('tabsContainer').innerHTML = tabs.map(tab => {
+    const count = tabMap[tab.id].data.length;
+    return `<button class="tab-btn ${currentTab === tab.id ? 'active' : ''}" data-tab="${tab.id}">${tab.label}<span class="tab-count">${count}</span></button>`;
+  }).join('');
+  $('tabsContainer').querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTab = btn.dataset.tab;
+      renderTabs();
+      renderCards();
+    });
+  });
+}
+
+// ============ RENDER CARDS ============
+function renderCards() {
+  const t = i18n[currentLang];
+  const q = searchQuery.toLowerCase();
+  let libs;
+  if (q) {
+    libs = allLibs().filter(lib =>
+      lib.name.toLowerCase().includes(q) ||
+      lib.description.toLowerCase().includes(q) ||
+      (lib.descriptionEn && lib.descriptionEn.toLowerCase().includes(q)) ||
+      lib.tags.some(tag => tag.toLowerCase().includes(q))
+    );
+  } else {
+    libs = tabMap[currentTab].data;
+  }
+
+  if (libs.length === 0) {
+    $('cardGrid').innerHTML = `
+      <div class="no-results">
+        <div style="margin-bottom:24px;opacity:0.2">${ICONS.search}</div>
+        <h3>${t.noResults}</h3>
+      </div>`;
+    return;
+  }
+
+  $('cardGrid').innerHTML = libs.map((lib, i) => {
+    const isGray = currentTheme === 'gray';
+    const iconColor = isGray ? '#475569' : lib.color;
+    const desc = currentLang === 'ko' ? lib.description : (lib.descriptionEn || lib.description);
+    const glowColor = isGray ? 'rgba(100,116,139,.3)' : lib.color;
+    const glowSoft = isGray ? 'rgba(100,116,139,.05)' : lib.color + '12';
+    return `
+      <div class="glass-card lib-card card-animate" style="animation-delay:${i * 0.04}s;--card-glow:${glowColor};--card-glow-soft:${glowSoft}">
+        <div class="color-bar" style="background:${isGray ? '#94a3b8' : lib.color}"></div>
+        <div class="card-header">
+          <div class="card-icon" style="color:${iconColor}">${ICONS[lib.icon] || ICONS.star}</div>
+          <div class="card-links">
+            ${q && lib.category ? `<span class="category-badge">${lib.category}</span>` : ''}
+            ${lib.github ? `<a href="${lib.github}" target="_blank" rel="noreferrer">${ICONS.github}</a>` : ''}
+            <a href="${lib.url}" target="_blank" rel="noreferrer">${ICONS.externalLink}</a>
+          </div>
+        </div>
+        <h3>${lib.name}</h3>
+        <p class="desc">${desc}</p>
+        <div class="tags-row">
+          ${lib.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+        </div>
+        <a href="${lib.demoUrl}" target="_blank" rel="noreferrer" class="demo-btn" style="text-decoration:none">${ICONS.play} ${t.demo}</a>
+      </div>`;
+  }).join('');
+}
+
+// ============ FIND LIB BY ID ============
+function findLib(id) {
+  for (const val of Object.values(tabMap)) {
+    const found = val.data.find(l => l.id === id);
+    if (found) return found;
+  }
+  return null;
+}
+
+// ============ OPEN DEMO MODAL ============
+function openDemo(libId) {
+  const lib = findLib(libId);
+  if (!lib) return;
+  const t = i18n[currentLang];
+  const isBlocked = blockedIds.includes(lib.id) || lib.isBlocked;
+
+  $('modalIcon').innerHTML = `<span style="color:${lib.color}">${ICONS[lib.icon] || ICONS.star}</span>`;
+  $('modalTitle').textContent = lib.name + ' ' + t.demo;
+  $('modalVisit').href = lib.url;
+  $('modalVisit').title = t.visit;
+
+  if (isBlocked) {
+    $('modalBody').innerHTML = `
+      <div class="blocked-msg">
+        <div style="margin-bottom:1.5rem;opacity:0.5">${ICONS.shield}</div>
+        <h4>${t.blockedMsg}</h4>
+        <p>${lib.name} ${currentLang === 'ko' ? '사이트는 보안 정책상 인라인 프레임으로 제공되지 않습니다.' : 'site does not provide inline frame due to security policies.'}</p>
+        <a href="${lib.demoUrl}" target="_blank" rel="noreferrer" class="open-external">
+          ${ICONS.externalLink} ${t.openExternal}
+        </a>
+      </div>`;
+  } else {
+    $('modalBody').innerHTML = `<iframe src="${lib.demoUrl}" title="${lib.name} Live Demo"></iframe>`;
+  }
+
+  $('demoModal').classList.add('active');
+}
+
+function closeDemo() {
+  $('demoModal').classList.remove('active');
+  setTimeout(() => { $('modalBody').innerHTML = ''; }, 300);
+}
+
+// ============ SPLASH MODAL ============
+function openSplash() { $('splashModal').classList.add('active'); }
+function closeSplash() { $('splashModal').classList.remove('active'); }
+
+// ============ THEME ============
+function cycleTheme() {
+  if (currentTheme === 'dark') currentTheme = 'light';
+  else if (currentTheme === 'light') currentTheme = 'gray';
+  else currentTheme = 'dark';
+  applyTheme();
+  renderCards();
+}
+
+function applyTheme() {
+  document.body.className = currentTheme === 'dark' ? '' : currentTheme;
+  $('moonIcon').style.display = currentTheme === 'dark' ? '' : 'none';
+  $('sunIcon').style.display = currentTheme === 'light' ? '' : 'none';
+  $('monitorIcon').style.display = currentTheme === 'gray' ? '' : 'none';
+}
+
+// ============ LANGUAGE ============
+function toggleLang() {
+  currentLang = currentLang === 'ko' ? 'en' : 'ko';
+  applyLang();
+  renderTabs();
+  renderCards();
+}
+
+function applyLang() {
+  const t = i18n[currentLang];
+  $('headerTag').textContent = t.tag;
+  $('showcaseText').textContent = t.showcase;
+  $('splashShowcase').textContent = t.showcase;
+  $('subtitleText').textContent = t.subtitle;
+  $('searchInput').placeholder = t.searchPlaceholder;
+  document.querySelector('.lang-label').textContent = currentLang.toUpperCase();
+  $('langBtn').title = currentLang === 'ko' ? 'Switch to English' : '한국어로 변경';
+}
+
+// ============ INIT ============
+function init() {
+  renderTabs();
+  renderCards();
+  applyTheme();
+  applyLang();
+
+  // Search
+  $('searchInput').addEventListener('input', e => {
+    searchQuery = e.target.value;
+    renderCards();
+  });
+
+  // Theme
+  $('themeBtn').addEventListener('click', cycleTheme);
+
+  // Language
+  $('langBtn').addEventListener('click', toggleLang);
+
+  // UI badge -> splash
+  $('uiBadge').addEventListener('click', openSplash);
+
+  // Modal close
+  $('modalCloseBtn').addEventListener('click', closeDemo);
+  $('demoModal').addEventListener('click', e => {
+    if (e.target === $('demoModal')) closeDemo();
+  });
+
+  // Splash close
+  $('splashCloseBtn').addEventListener('click', closeSplash);
+  $('splashModal').addEventListener('click', e => {
+    if (e.target === $('splashModal')) closeSplash();
+  });
+
+  // ESC key
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      closeDemo();
+      closeSplash();
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
