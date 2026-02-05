@@ -212,17 +212,17 @@
     .search-icon {
       position: absolute;
       left: 10px;
-      color: rgba(255,255,255,.55);
+      color: rgba(255,255,255,.7);
       display: flex;
       pointer-events: none;
       transition: color 0.3s;
     }
-    body.light .search-icon, body.gray .search-icon { color: rgba(0,0,0,.5); }
+    body.light .search-icon, body.gray .search-icon { color: rgba(0,0,0,.55); }
     .search-input {
       padding: 10px 14px 10px 36px;
       border-radius: 10px;
-      border: 1px solid transparent;
-      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.15);
       color: white;
       width: 220px;
       font-size: 0.85rem;
@@ -231,13 +231,14 @@
       font-family: var(--font-body);
     }
     .search-input:focus {
-      background: rgba(255,255,255,.1);
-      border-color: rgba(139,92,246,.4);
+      background: rgba(255,255,255,.2);
+      border-color: rgba(139,92,246,.6);
       box-shadow: 0 0 0 3px rgba(139,92,246,.1);
     }
     body.light .search-input, body.gray .search-input {
-      background: rgba(0,0,0,.04);
-      color: #1e293b;
+      background: rgba(0,0,0,.08);
+      border-color: rgba(0,0,0,.15);
+      color: #0f172a;
     }
     body.light .search-input:focus, body.gray .search-input:focus {
       background: rgba(0,0,0,.06);
@@ -251,23 +252,26 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255,255,255,.06);
-      border: 1px solid transparent;
-      color: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.95);
       transition: all 0.3s;
       font-family: var(--font-body);
     }
     body.light .top-btn, body.gray .top-btn {
-      background: rgba(0,0,0,.04);
-      color: #334155;
+      background: rgba(0,0,0,.06);
+      border-color: rgba(0,0,0,.12);
+      color: #1e293b;
     }
     .top-btn:hover {
-      background: rgba(255,255,255,.12);
+      background: rgba(255,255,255,.18);
+      border-color: rgba(255,255,255,.25);
       color: white;
     }
     body.light .top-btn:hover, body.gray .top-btn:hover {
-      background: rgba(0,0,0,.08);
-      color: #1e293b;
+      background: rgba(0,0,0,.1);
+      border-color: rgba(0,0,0,.18);
+      color: #0f172a;
     }
 
     /* Header */
