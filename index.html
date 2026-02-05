@@ -18,7 +18,7 @@
       --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
       --accent-gradient-2: linear-gradient(135deg, #06b6d4, #3b82f6, #8b5cf6, #ec4899);
       --text-main: #f1f5f9;
-      --text-secondary: #94a3b8;
+      --text-secondary: #cbd5e1;
       --glass-blur: blur(20px);
       --font-header: "Outfit", sans-serif;
       --font-body: "Inter", sans-serif;
@@ -92,7 +92,7 @@
       --card-bg: rgba(255,255,255,.7);
       --card-border: rgba(0,0,0,.06);
       --text-main: #0f172a;
-      --text-secondary: #64748b;
+      --text-secondary: #475569;
       background-color: var(--bg-color);
       color: var(--text-main);
     }
@@ -102,7 +102,7 @@
       --card-bg: rgba(255,255,255,.85);
       --card-border: rgba(0,0,0,.06);
       --text-main: #0f172a;
-      --text-secondary: #64748b;
+      --text-secondary: #475569;
       background-color: var(--bg-color);
       color: var(--text-main);
     }
@@ -212,12 +212,12 @@
     .search-icon {
       position: absolute;
       left: 10px;
-      color: rgba(255,255,255,.3);
+      color: rgba(255,255,255,.55);
       display: flex;
       pointer-events: none;
       transition: color 0.3s;
     }
-    body.light .search-icon, body.gray .search-icon { color: rgba(0,0,0,.3); }
+    body.light .search-icon, body.gray .search-icon { color: rgba(0,0,0,.5); }
     .search-input {
       padding: 10px 14px 10px 36px;
       border-radius: 10px;
@@ -253,13 +253,13 @@
       justify-content: center;
       background: rgba(255,255,255,.06);
       border: 1px solid transparent;
-      color: rgba(255,255,255,.7);
+      color: rgba(255,255,255,.9);
       transition: all 0.3s;
       font-family: var(--font-body);
     }
     body.light .top-btn, body.gray .top-btn {
       background: rgba(0,0,0,.04);
-      color: #475569;
+      color: #334155;
     }
     .top-btn:hover {
       background: rgba(255,255,255,.12);
@@ -396,9 +396,9 @@
     .tab-btn {
       padding: 10px 20px;
       border-radius: 11px;
-      border: none;
-      background: transparent;
-      color: rgba(255,255,255,.45);
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
       font-weight: 600;
       font-size: 0.88rem;
       cursor: pointer;
@@ -407,28 +407,31 @@
       letter-spacing: 0.01em;
       position: relative;
     }
-    body.light .tab-btn, body.gray .tab-btn { color: #94a3b8; }
+    body.light .tab-btn, body.gray .tab-btn { color: #334155; background: rgba(0,0,0,.04); border-color: rgba(0,0,0,.1); }
     .tab-btn.active {
       background: var(--accent-gradient);
       color: white;
+      border-color: transparent;
       box-shadow: 0 4px 16px rgba(139,92,246,.45), inset 0 1px 0 rgba(255,255,255,.2);
     }
     .tab-btn .tab-count {
       display: inline-block;
       font-size: 0.65rem;
       font-weight: 700;
-      background: rgba(255,255,255,.15);
+      background: rgba(255,255,255,.25);
+      color: #facc15;
       padding: 1px 6px;
       border-radius: 6px;
       margin-left: 6px;
       vertical-align: middle;
     }
     .tab-btn.active .tab-count {
-      background: rgba(255,255,255,.25);
+      background: rgba(255,255,255,.35);
+      color: #facc15;
     }
-    .tab-btn:hover:not(.active) { color: rgba(255,255,255,.8); background: rgba(255,255,255,.06); }
+    .tab-btn:hover:not(.active) { color: white; background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.25); }
     body.light .tab-btn:hover:not(.active), body.gray .tab-btn:hover:not(.active) {
-      color: #1e293b; background: rgba(0,0,0,.04);
+      color: #0f172a; background: rgba(0,0,0,.08); border-color: rgba(0,0,0,.15);
     }
 
     /* Grid - 4 columns */
@@ -447,6 +450,7 @@
       cursor: default;
       border-radius: 16px;
       border-color: var(--card-glow, rgba(255,255,255,.08));
+      background: linear-gradient(135deg, var(--card-tint, transparent) 0%, var(--card-bg) 60%);
     }
     /* Gradient border glow on hover */
     .lib-card::before {
@@ -521,7 +525,7 @@
       align-items: center;
     }
     .card-links a {
-      color: rgba(255,255,255,.35);
+      color: rgba(255,255,255,.6);
       transition: all 0.3s;
       display: flex;
       padding: 3px;
@@ -532,7 +536,7 @@
       color: var(--accent-color);
       background: rgba(59,130,246,.1);
     }
-    body.light .card-links a, body.gray .card-links a { color: #94a3b8; }
+    body.light .card-links a, body.gray .card-links a { color: #64748b; }
     .category-badge {
       font-size: 0.6rem;
       font-weight: 600;
@@ -575,7 +579,7 @@
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,.06);
       background: rgba(255,255,255,.03);
-      color: rgba(255,255,255,.7);
+      color: rgba(255,255,255,.9);
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
@@ -605,9 +609,9 @@
       grid-column: 1 / -1;
       text-align: center;
       padding: 100px 0;
-      color: rgba(255,255,255,.2);
+      color: rgba(255,255,255,.5);
     }
-    body.light .no-results, body.gray .no-results { color: rgba(0,0,0,.2); }
+    body.light .no-results, body.gray .no-results { color: rgba(0,0,0,.5); }
 
     /* Modal overlay */
     .modal-overlay {
@@ -687,7 +691,7 @@
       border-radius: 10px;
       border: 1px solid rgba(255,255,255,.08);
       background: rgba(255,255,255,.05);
-      color: rgba(255,255,255,.7);
+      color: rgba(255,255,255,.9);
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -793,7 +797,7 @@
       width: 36px; height: 36px;
       border-radius: 10px;
       background: rgba(0,0,0,.4);
-      color: rgba(255,255,255,.8);
+      color: rgba(255,255,255,.95);
       border: 1px solid rgba(255,255,255,.1);
       display: flex;
       align-items: center;
@@ -850,7 +854,7 @@
       justify-content: center;
       gap: 10px;
       flex-wrap: wrap;
-      opacity: 0.7;
+      opacity: 0.9;
       font-size: 0.9rem;
     }
     .splash-tech .links a {
@@ -861,7 +865,7 @@
     .splash-tech .links a:hover { color: var(--accent-color); }
     .splash-footer {
       font-size: 0.9rem;
-      opacity: 0.5;
+      opacity: 0.85;
     }
     .splash-footer a {
       color: inherit;
@@ -901,14 +905,14 @@
     footer {
       padding: 50px 2rem 50px;
       text-align: center;
-      opacity: 0.6;
+      opacity: 0.85;
     }
     .footer-divider {
       width: 60px; height: 3px;
       margin: 0 auto 28px;
       border-radius: 3px;
       background: var(--accent-gradient);
-      opacity: 0.5;
+      opacity: 0.8;
     }
     footer .tech-links {
       margin-bottom: 12px;
@@ -930,7 +934,7 @@
     }
     footer .author a {
       font-weight: 600;
-      border-bottom: 1px solid rgba(255,255,255,.15);
+      border-bottom: 1px solid rgba(255,255,255,.3);
     }
     body.light footer .author a, body.gray footer .author a { border-bottom-color: rgba(0,0,0,.1); }
 
@@ -1180,12 +1184,12 @@ const iconLibs = [
   {id:"bootstrap",name:"Bootstrap Icons",url:"https://icons.getbootstrap.com/",demoUrl:"https://icons.getbootstrap.com/",github:"https://github.com/twbs/icons",description:"Bootstrap 테마에 최적화된 2,000개 이상의 공식 SVG 아이콘.",descriptionEn:"2,000+ official SVG icons optimized for Bootstrap themes.",tags:["Bootstrap","Standard","Official"],color:"#7952B3",icon:"layers"},
   {id:"icon_kitchen",name:"Icon Kitchen",url:"https://icon.kitchen/",demoUrl:"https://icon.kitchen/",description:"Android, iOS, 웹을 위한 앱 아이콘을 쉽고 빠르게 생성할 수 있는 도구.",descriptionEn:"A tool to quickly and easily generate app icons for Android, iOS, and the Web.",tags:["Generator","App Icons","Tool"],color:"#6a3de8",icon:"star"},
   {id:"emojikitchen",name:"Emoji Kitchen",url:"https://emojikitchen.dev/",demoUrl:"https://emojikitchen.dev/",description:"구글 이모지 키친의 공식 웹 버전. 두 개의 이모지를 조합하여 나만의 특별한 스티커를 만드세요.",descriptionEn:"The official web version of Google's Emoji Kitchen. Combine two emojis to create your own unique stickers.",tags:["Emoji","Creative","Stickers"],color:"#FFCC22",icon:"star"},
-  {id:"iconly",name:"Iconly",url:"https://iconly.pro/",demoUrl:"https://iconly.pro/",description:"5가지 스타일로 제공되는 600+ 필수 아이콘과 트렌디한 3D 아이콘 컬렉션.",descriptionEn:"600+ essential icons in 5 styles, plus a trendy 3D icon collection.",tags:["3D Icons","5 Styles","Trendy"],color:"#2F2F2F",icon:"leaf"}
+  {id:"iconly",name:"Iconly",url:"https://iconly.pro/",demoUrl:"https://iconly.pro/",description:"5가지 스타일로 제공되는 600+ 필수 아이콘과 트렌디한 3D 아이콘 컬렉션.",descriptionEn:"600+ essential icons in 5 styles, plus a trendy 3D icon collection.",tags:["3D Icons","5 Styles","Trendy"],color:"#F472B6",icon:"leaf"}
 ];
 
 const systemLibs = [
   {id:"material",name:"Material Design",url:"https://m3.material.io/",demoUrl:"https://m3.material.io/",description:"구글의 차세대 디자인 시스템. 모바일과 데스크톱을 아우르는 일관된 사용자 경험을 선사합니다.",descriptionEn:"Google's next-generation design system, delivering consistent UX across mobile and desktop.",tags:["Google","M3","Comprehensive"],color:"#4285F4",icon:"star"},
-  {id:"apple",name:"Apple HIG",url:"https://developer.apple.com/design/human-interface-guidelines/",demoUrl:"https://developer.apple.com/design/human-interface-guidelines/",description:"Apple 플랫폼의 디자인 원칙. iOS, macOS 등 전 제품군에 걸친 사용자 중심의 인터페이스 가이드.",descriptionEn:"Design principles for Apple platforms, ensuring user-centered interfaces across iOS and macOS.",tags:["Apple","Premium","Principles"],color:"#000000",icon:"globe"},
+  {id:"apple",name:"Apple HIG",url:"https://developer.apple.com/design/human-interface-guidelines/",demoUrl:"https://developer.apple.com/design/human-interface-guidelines/",description:"Apple 플랫폼의 디자인 원칙. iOS, macOS 등 전 제품군에 걸친 사용자 중심의 인터페이스 가이드.",descriptionEn:"Design principles for Apple platforms, ensuring user-centered interfaces across iOS and macOS.",tags:["Apple","Premium","Principles"],color:"#A2AAAD",icon:"globe"},
   {id:"carbon",name:"IBM Carbon",url:"https://carbondesignsystem.com/",demoUrl:"https://carbondesignsystem.com/",description:"IBM의 엔터프라이즈급 오픈소스 디자인 시스템. 정교한 데이터 시각화와 접근성이 특징입니다.",descriptionEn:"IBM's enterprise-grade open-source design system, featuring sophisticated data visualization.",tags:["IBM","Enterprise","Accessible"],color:"#0F62FE",icon:"layers"},
   {id:"atlassian",name:"Atlassian Design",url:"https://atlassian.design/",demoUrl:"https://atlassian.design/",description:"Jira와 Confluence를 지탱하는 협업 최적화 디자인 가이드라인. 실무 중심의 패턴을 제공합니다.",descriptionEn:"Collaboration-optimized design guidelines behind Jira and Confluence, providing practical patterns.",tags:["Atlassian","Productivity","Patterns"],color:"#0052CC",icon:"leaf"},
   {id:"polaris",name:"Shopify Polaris",url:"https://polaris.shopify.com/",demoUrl:"https://polaris.shopify.com/",description:"이커머스 경험을 위한 완벽한 프레임워크. 판매자와 구매자 모두를 고려한 UX 가이드를 제공합니다.",descriptionEn:"A complete framework for e-commerce, offering UX guides for both merchants and customers.",tags:["Shopify","E-commerce","UX"],color:"#95BF47",icon:"layout"},
@@ -1194,17 +1198,17 @@ const systemLibs = [
   {id:"ds_gallery",name:"Design Systems Repo",url:"https://designsystemsrepo.com/",demoUrl:"https://designsystemsrepo.com/",description:"500개 이상의 다양한 기업 디자인 시스템 사례를 한곳에서 볼 수 있는 통합 저장소.",descriptionEn:"A comprehensive repository featuring over 500 design system examples from various companies.",tags:["Collection","Catalog","Resource"],color:"#F06292",icon:"layout"},
   {id:"adele",name:"Adele",url:"https://adele.uxpin.com/",demoUrl:"https://adele.uxpin.com/",description:"공개된 디자인 시스템 라이브러리들의 데이터베이스. 기술 스택과 기능을 한눈에 비교하세요.",descriptionEn:"A database of public design systems. Compare tech stacks and features at a glance.",tags:["Database","Comparison","UXPin"],color:"#FF4100",icon:"code"},
   {id:"ds_handbook",name:"DS Handbook",url:"https://www.designbetter.co/design-systems-handbook",demoUrl:"https://www.designbetter.co/design-systems-handbook",description:"성공적인 디자인 시스템 구축을 위한 가이드북. 기초부터 고급 전략까지 상세히 다룹니다.",descriptionEn:"A comprehensive guide for building successful design systems, from basics to advanced strategies.",tags:["E-book","Education","Strategy"],color:"#FFC107",icon:"star"},
-  {id:"laws_of_ux",name:"Laws of UX",url:"https://lawsofux.com/",demoUrl:"https://lawsofux.com/",description:"디자이너가 사용자 인터페이스를 만들 때 참고하는 최적의 심리학적 원칙 모음.",descriptionEn:"A collection of the psychological principles that designers reference when building interfaces.",tags:["Psychology","UX Principles","Guide"],color:"#212121",icon:"bookOpen"},
-  {id:"pencil",name:"Pencil",url:"https://www.pencil.dev/",demoUrl:"https://www.pencil.dev/",description:"캔버스 위에서 디자인하고 즉시 코드로 변환하는 AI 기반 디자인 도구. 프런트엔드 개발의 새로운 흐름을 경험하세요.",descriptionEn:"AI-powered design tool to design on canvas and land in code. Experience the new flow of frontend development.",tags:["AI Design","Design-to-Code","Canvas"],color:"#000000",icon:"star"}
+  {id:"laws_of_ux",name:"Laws of UX",url:"https://lawsofux.com/",demoUrl:"https://lawsofux.com/",description:"디자이너가 사용자 인터페이스를 만들 때 참고하는 최적의 심리학적 원칙 모음.",descriptionEn:"A collection of the psychological principles that designers reference when building interfaces.",tags:["Psychology","UX Principles","Guide"],color:"#F59E0B",icon:"bookOpen"},
+  {id:"pencil",name:"Pencil",url:"https://www.pencil.dev/",demoUrl:"https://www.pencil.dev/",description:"캔버스 위에서 디자인하고 즉시 코드로 변환하는 AI 기반 디자인 도구. 프런트엔드 개발의 새로운 흐름을 경험하세요.",descriptionEn:"AI-powered design tool to design on canvas and land in code. Experience the new flow of frontend development.",tags:["AI Design","Design-to-Code","Canvas"],color:"#34D399",icon:"star"}
 ];
 
 const heroLibs = [
-  {id:"unsplash",name:"Unsplash",url:"https://unsplash.com/",demoUrl:"https://unsplash.com/",description:"500만+ 고해상도 무료 이미지. 상업적 이용 가능, 저작권 표시 불필요.",descriptionEn:"5M+ high-resolution free images. Commercial use allowed, no attribution required.",tags:["Images","HD","Free"],color:"#000000",icon:"layout"},
+  {id:"unsplash",name:"Unsplash",url:"https://unsplash.com/",demoUrl:"https://unsplash.com/",description:"500만+ 고해상도 무료 이미지. 상업적 이용 가능, 저작권 표시 불필요.",descriptionEn:"5M+ high-resolution free images. Commercial use allowed, no attribution required.",tags:["Images","HD","Free"],color:"#E0E0E0",icon:"layout"},
   {id:"pexels",name:"Pexels",url:"https://www.pexels.com/",demoUrl:"https://www.pexels.com/",description:"수백만 개 무료 스톡 사진 및 비디오. API 제공, 완전 무료.",descriptionEn:"Millions of free stock photos and videos. API available, completely free.",tags:["Photos","Videos","Free"],color:"#05A081",icon:"globe"},
   {id:"pixabay",name:"Pixabay",url:"https://pixabay.com/",demoUrl:"https://pixabay.com/",description:"460만+ 이미지 및 비디오. AI 생성 이미지도 포함되어 있습니다.",descriptionEn:"4.6M+ images and videos. AI-generated images also included.",tags:["Images","AI","Free"],color:"#2EC66D",icon:"star"},
   {id:"coolors_grad",name:"Coolors Gradients",url:"https://coolors.co/gradients",demoUrl:"https://coolors.co/gradients",description:"수천 개의 선별된 그라데이션 팔레트. 색상 조합 생성기 포함.",descriptionEn:"Thousands of curated gradient palettes. Color combination generator included.",tags:["Gradients","Colors","Tool"],color:"#0066FF",icon:"palette"},
   {id:"webgradients",name:"WebGradients",url:"https://webgradients.com/",demoUrl:"https://webgradients.com/",description:"180개 선별된 그라데이션. CSS/PNG 다운로드 및 디자인 툴 플러그인 지원.",descriptionEn:"180 curated gradients. CSS/PNG download and design tool plugins supported.",tags:["CSS Gradients","Design","Easy"],color:"#FF9A9E",icon:"layers"},
-  {id:"grad_hunt",name:"Gradient Hunt",url:"https://gradienthunt.com/",demoUrl:"https://gradienthunt.com/",description:"커뮤니티 기반 그라데이션 컬렉션. 트렌디한 색상 조합을 탐색하세요.",descriptionEn:"Community-based gradient collection. Explore trendy color combinations.",tags:["Community","Trending","Gradients"],color:"#2C3E50",icon:"sparkles"},
+  {id:"grad_hunt",name:"Gradient Hunt",url:"https://gradienthunt.com/",demoUrl:"https://gradienthunt.com/",description:"커뮤니티 기반 그라데이션 컬렉션. 트렌디한 색상 조합을 탐색하세요.",descriptionEn:"Community-based gradient collection. Explore trendy color combinations.",tags:["Community","Trending","Gradients"],color:"#818CF8",icon:"sparkles"},
   {id:"css_grad",name:"CSS Gradient",url:"https://cssgradient.io/",demoUrl:"https://cssgradient.io/",description:"실시간 그라데이션 생성기. Linear, Radial, Conic 스타일 지원.",descriptionEn:"Real-time gradient generator. Supports Linear, Radial, and Conic styles.",tags:["Tool","Generator","CSS"],color:"#4FC3F7",icon:"code"},
   {id:"adobe_color",name:"Adobe Color",url:"https://color.adobe.com/",demoUrl:"https://color.adobe.com/",description:"AI 기반 색상 조합 생성 및 이미지에서 팔레트 추출 기능을 제공합니다.",descriptionEn:"AI-based color wheel and palette extraction from images.",tags:["Adobe","AI","Palettes"],color:"#FF0000",icon:"palette"},
   {id:"happyhues",name:"Happy Hues",url:"https://www.happyhues.co/",demoUrl:"https://www.happyhues.co/",description:"실제 웹사이트 예제와 함께 팔레트별 적용 사례를 확인하세요.",descriptionEn:"See palette applications with real-world website examples.",tags:["UX","Palettes","Visual"],color:"#6366F1",icon:"layout"},
@@ -1223,7 +1227,7 @@ const fontLibs = [
   {id:"dafont",name:"DaFont",url:"https://www.dafont.com/",demoUrl:"https://www.dafont.com/",description:"80,000+ 방대한 폰트 라이브러리. 화려하고 독창적인 디스플레이 폰트가 가득합니다.",descriptionEn:"Massive library of 80,000+ fonts. Full of decorative and creative display fonts.",tags:["Massive","Category","Creative"],color:"#FF6600",icon:"palette"},
   {id:"fontshare",name:"FontShare",url:"https://www.fontshare.com/",demoUrl:"https://www.fontshare.com/",description:"Indian Type Foundry 제공. 100% 무료이면서도 트렌디하고 세련된 상업용 폰트 모음.",descriptionEn:"Offered by Indian Type Foundry. 100% free, trendy and sophisticated commercial fonts.",tags:["Modern","Free","High-quality"],color:"#F59E0B",icon:"layers"},
   {id:"bunny_fonts",name:"Bunny Fonts",url:"https://fonts.bunny.net/",demoUrl:"https://fonts.bunny.net/",description:"개인정보 보호를 중시하는 Google Fonts의 대안 서비스. GDPR을 완벽하게 준수합니다.",descriptionEn:"Privacy-first alternative to Google Fonts. Fully GDPR compliant.",tags:["Privacy","Google Alt","CDN"],color:"#FF3366",icon:"leaf"},
-  {id:"font_in_use",name:"Font In Use",url:"https://fontsinuse.com/",demoUrl:"https://fontsinuse.com/",description:"실제 디자인 작업물에서 폰트가 어떻게 사용되었는지 탐색하고 영감을 얻으세요.",descriptionEn:"Explore how fonts are used in real design projects and get inspired.",tags:["Inspiration","Case Study","Design"],color:"#212121",icon:"globe"},
+  {id:"font_in_use",name:"Font In Use",url:"https://fontsinuse.com/",demoUrl:"https://fontsinuse.com/",description:"실제 디자인 작업물에서 폰트가 어떻게 사용되었는지 탐색하고 영감을 얻으세요.",descriptionEn:"Explore how fonts are used in real design projects and get inspired.",tags:["Inspiration","Case Study","Design"],color:"#E879F9",icon:"globe"},
   {id:"naver_fonts",name:"네이버 글꼴",url:"https://hangeul.naver.com/",demoUrl:"https://hangeul.naver.com/",description:"나눔고딕, 나눔스퀘어 등 네이버가 제공하는 신뢰할 수 있는 무료 한글 글꼴 모음.",descriptionEn:"Reliable free Korean font collection by Naver, including Nanum series.",tags:["Naver","Korean","Standard"],color:"#28A745",icon:"layout"},
   {id:"woowahan",name:"배달의민족 글꼴",url:"https://www.woowahan.com/fonts",demoUrl:"https://www.woowahan.com/fonts",description:"주아체, 한나체 등 독특한 감성으로 사랑받는 배민의 무료 한글 폰트 시리즈.",descriptionEn:"Popular free Korean font series by Baemin with unique emotions.",tags:["Branding","Korean","Famous"],color:"#2AC1BC",icon:"star"},
   {id:"vfonts",name:"V-Fonts",url:"https://v-fonts.com/",demoUrl:"https://v-fonts.com/",description:"가변 폰트(Variable Fonts)의 가능성을 탐색하세요. 굵기와 폭을 자유자재로 조절 가능합니다.",descriptionEn:"Explore the possibilities of Variable Fonts. Adjust weight and width freely.",tags:["Variable","Future","Interactive"],color:"#6366F1",icon:"zap"},
@@ -1242,15 +1246,15 @@ const microLibs = [
   {id:"lordicon",name:"Lordicon",url:"https://lordicon.com/",demoUrl:"https://lordicon.com/",description:"1,500개 이상의 고품질 애니메이션 아이콘. Lottie와 GIF 등 다양한 포맷 지원.",descriptionEn:"1,500+ high-quality animated icons. Supports Lottie, GIF, and more.",tags:["Animated Icons","Lottie","UX"],color:"#FF3F81",icon:"layers"},
   {id:"lucide_animated",name:"Lucide Animated",url:"https://lucide-animated.com/",demoUrl:"https://lucide-animated.com/",description:"Lucide 아이콘에 생동감을 불어넣는 애니메이션 아이콘 컬렉션. 상호작용이 즐거운 UI를 구축하세요.",descriptionEn:"A collection of animated icons that bring Lucide icons to life. Build interactive and joyful UIs.",tags:["Animated Icons","Lucide","Micro-interaction"],color:"#F59E0B",icon:"zap"},
   {id:"buttons_gen",name:"Buttons Gen",url:"https://markodenic.com/tools/buttons-generator/",demoUrl:"https://markodenic.com/tools/buttons-generator/",description:"다양한 인터랙티브 버튼 효과를 실시간으로 확인하고 코드를 생성하세요.",descriptionEn:"Check various interactive button effects in real-time and generate code.",tags:["Buttons","Tool","Generator"],color:"#4FC3F7",icon:"sparkles"},
-  {id:"aos_lib",name:"AOS",url:"https://michalsnik.github.io/aos/",demoUrl:"https://michalsnik.github.io/aos/",description:"스크롤에 반응하여 요소가 멋지게 나타나는 표준 스크롤 애니메이션 라이브러리.",descriptionEn:"Standard scroll animation library for elements appearing on scroll.",tags:["Scroll","JS","UX"],color:"#000000",icon:"barChart"},
+  {id:"aos_lib",name:"AOS",url:"https://michalsnik.github.io/aos/",demoUrl:"https://michalsnik.github.io/aos/",description:"스크롤에 반응하여 요소가 멋지게 나타나는 표준 스크롤 애니메이션 라이브러리.",descriptionEn:"Standard scroll animation library for elements appearing on scroll.",tags:["Scroll","JS","UX"],color:"#60A5FA",icon:"barChart"},
   {id:"tsparticles",name:"tsParticles",url:"https://particles.js.org/",demoUrl:"https://particles.js.org/",description:"다양한 파티클 배경 효과를 생성하는 가장 강력한 자바스크립트 라이브러리.",descriptionEn:"The most powerful JS library for generating various particle background effects.",tags:["Particles","Background","Dynamic"],color:"#EA4335",icon:"star"},
   {id:"autoanimate",name:"AutoAnimate",url:"https://auto-animate.formkit.com/",demoUrl:"https://auto-animate.formkit.com/",description:"코드 한 줄로 리스트나 요소의 변경을 마법처럼 부드럽게 만들어주는 애니메이션 도구.",descriptionEn:"An animation tool that makes list/element changes magically smooth with one line of code.",tags:["Zero-config","Smooth","Utility"],color:"#FFC107",icon:"zap"}
 ];
 
 const vizLibs = [
   {id:"bananax",name:"BananaX Infographic",url:"https://furoku.github.io/bananaX/projects/infographic-evaluation/en/",demoUrl:"https://furoku.github.io/bananaX/projects/infographic-evaluation/en/",description:"바나나X 프로젝트의 인포그래픽 평가 도구. 직관적이고 인터랙티브한 시각화 사례.",descriptionEn:"Infographic evaluation tool from the BananaX project. An intuitive and interactive visualization case.",tags:["Infographic","Evaluation","Interactive"],color:"#FFE135",icon:"pieChart"},
-  {id:"observable",name:"Observable",url:"https://observablehq.com/@observablehq/gallery",demoUrl:"https://observablehq.com/@observablehq/gallery",description:"D3.js 기반 인터랙티브 노트북. 실시간 데이터 시각화 편집과 커뮤니티 갤러리를 제공합니다.",descriptionEn:"D3.js-based interactive notebook. Features real-time data visualization editing and community gallery.",tags:["D3.js","Notebook","Collaborative"],color:"#212121",icon:"barChart"},
-  {id:"pudding",name:"The Pudding",url:"https://pudding.cool/",demoUrl:"https://pudding.cool/",description:"비주얼 에세이 형식의 창의적인 데이터 저널리즘. 스크롤 기반 스토리텔링의 정점.",descriptionEn:"Creative data journalism in visual essay format. The peak of scrollytelling.",tags:["Journalism","Storytelling","Creative"],color:"#000000",icon:"newspaper"},
+  {id:"observable",name:"Observable",url:"https://observablehq.com/@observablehq/gallery",demoUrl:"https://observablehq.com/@observablehq/gallery",description:"D3.js 기반 인터랙티브 노트북. 실시간 데이터 시각화 편집과 커뮤니티 갤러리를 제공합니다.",descriptionEn:"D3.js-based interactive notebook. Features real-time data visualization editing and community gallery.",tags:["D3.js","Notebook","Collaborative"],color:"#38BDF8",icon:"barChart"},
+  {id:"pudding",name:"The Pudding",url:"https://pudding.cool/",demoUrl:"https://pudding.cool/",description:"비주얼 에세이 형식의 창의적인 데이터 저널리즘. 스크롤 기반 스토리텔링의 정점.",descriptionEn:"Creative data journalism in visual essay format. The peak of scrollytelling.",tags:["Journalism","Storytelling","Creative"],color:"#FB923C",icon:"newspaper"},
   {id:"infobeautiful",name:"Information is Beautiful",url:"https://informationisbeautiful.net/",demoUrl:"https://informationisbeautiful.net/",description:"수상 경력의 고품격 인포그래픽 모음. 복잡한 데이터를 아름답고 간결하게 시각화합니다.",descriptionEn:"Award-winning high-quality infographics. Visualizes complex data beautifully and concisely.",tags:["Infographic","Beautiful","Data-art"],color:"#FF3366",icon:"palette"},
   {id:"flowingdata",name:"Flowing Data",url:"https://flowingdata.com/",demoUrl:"https://flowingdata.com/",description:"통계학자 Nathan Yau가 운영하는 데이터 시각화 전문 사이트. 다양한 사례와 튜토리얼 제공.",descriptionEn:"Data visualization site run by statistician Nathan Yau. Provides various cases and tutorials.",tags:["Statistics","Tutorials","Insights"],color:"#FFA500",icon:"barChart"},
   {id:"visualcinnamon",name:"Visual Cinnamon",url:"https://www.visualcinnamon.com/",demoUrl:"https://www.visualcinnamon.com/",description:"Nadieh Bremer의 예술적 데이터 시각화 포트폴리오. D3.js 기반의 환상적인 작품들을 탐색하세요.",descriptionEn:"Artistic data visualization portfolio of Nadieh Bremer. Explore fantastic D3.js-based works.",tags:["D3.js","Artistic","Portfolio"],color:"#A260FF",icon:"star"},
@@ -1348,8 +1352,9 @@ function renderCards() {
     const glowSoft = isGray ? 'rgba(100,116,139,.06)' : lib.color + '15';
     // Create a muted border color from the library color
     const borderColor = isGray ? 'rgba(100,116,139,.25)' : lib.color + '35';
+    const cardTint = isGray ? 'rgba(100,116,139,.06)' : lib.color + '12';
     return `
-      <div class="glass-card lib-card card-animate" style="animation-delay:${i * 0.03}s;--card-glow:${glowColor};--card-glow-soft:${glowSoft};border-color:${borderColor}">
+      <div class="glass-card lib-card card-animate" style="animation-delay:${i * 0.03}s;--card-glow:${glowColor};--card-glow-soft:${glowSoft};--card-tint:${cardTint};border-color:${borderColor}">
         <div class="color-bar" style="background:${isGray ? '#94a3b8' : lib.color}"></div>
         <div class="card-header">
           <div class="card-icon" style="color:${iconColor}">${ICONS[lib.icon] || ICONS.star}</div>
@@ -1367,6 +1372,13 @@ function renderCards() {
         <a href="${lib.demoUrl}" target="_blank" rel="noreferrer" class="demo-btn" style="text-decoration:none">${ICONS.play} ${t.demo}</a>
       </div>`;
   }).join('');
+
+  document.querySelectorAll('.card-animate').forEach(card => {
+    card.addEventListener('animationend', () => {
+      card.classList.remove('card-animate');
+      card.style.opacity = '1';
+    }, { once: true });
+  });
 }
 
 // ============ FIND LIB BY ID ============
